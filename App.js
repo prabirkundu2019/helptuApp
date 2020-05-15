@@ -10,7 +10,7 @@ import { DrawerActions } from '@react-navigation/native';
 
 import LoginScreen from './Screen/LoginScreen';
 import RegistrationScreen from './Screen/RegistrationScreen';
-import CompanyScreen from './Screen/CompanyScreen';
+import AllService from './Screen/AllService';
 
 import axios from 'axios';
 
@@ -28,7 +28,7 @@ const HomeStack = createStackNavigator();
 
 const HomeStackScreen = () => (
   <HomeStack.Navigator>
-    <HomeStack.Screen name="Company" component={CompanyScreen} /> 
+    <HomeStack.Screen name="Service" component={AllService}   options={{headerShown: false}} />
   </HomeStack.Navigator>
 );
 

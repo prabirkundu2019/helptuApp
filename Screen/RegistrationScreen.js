@@ -23,104 +23,122 @@ export default function RegistrationScreen({ navigation }) {
     const { signUp } = React.useContext(AuthContext);
   
     return (
-      <View style={{flex: 1}}>
-        <View          
-          style={{width: '100%', height: '100%'}}
-        >
-          <View
-                style={styles.logo}
-          />
+      <View style={styles.mainWrapper}>
           <View style={styles.container}>
-            <View style={styles.inputView} >
-              <TextInput
-                placeholder="Name"
-                value={name}
-                onChangeText={setName}
-                style={styles.inputText}
-              />
+            <View style={styles.headerContent}>
+              <Text style={styles.headerTitle}>Create Account </Text>
+              <Text style={styles.headerText}>
+                Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                officia deserunt{' '}
+              </Text>
             </View>
-            <View style={styles.inputView} >
-              <TextInput
-                placeholder="Email"
-                value={username}
-                onChangeText={setUsername}
-                style={styles.inputText}
-              />
-            </View>
-            <View style={styles.inputView} >
-              <TextInput
-                placeholder="Password"
-                value={password}
-                style={styles.inputText}
-                onChangeText={setPassword}
-                secureTextEntry
-              />
-            </View>
-            <View style={{alignSelf: 'flex-end'}}>
-              <TouchableOpacity>
-                <Text style={styles.forgotPass} onPress={() => navigation.navigate('Registration')}>Forgot Password ?</Text>
+            <View style={styles.formContainer}>
+              <View style={styles.inputView} >
+                <TextInput
+                  placeholder="Name"
+                  value={name}
+                  onChangeText={setName}
+                  style={styles.inputText}
+                />
+              </View>
+              <View style={styles.inputView} >
+                <TextInput
+                  placeholder="Email"
+                  value={username}
+                  onChangeText={setUsername}
+                  style={styles.inputText}
+                />
+              </View>
+              <View style={styles.inputView} >
+                <TextInput
+                  placeholder="Password"
+                  value={password}
+                  style={styles.inputText}
+                  onChangeText={setPassword}
+                  secureTextEntry
+                />
+              </View>
+              <TouchableOpacity style={styles.loginBtn} onPress={() => signUp({ name, username, password })}>
+                <Text style={styles.loginText}>Sign Up</Text>
               </TouchableOpacity>
-            </View>
-            {/* <TouchableOpacity>
-              <Text style={styles.forgot}>Forgot Password?</Text>
-            </TouchableOpacity> */}
-            <TouchableOpacity style={styles.loginBtn} onPress={() => signUp({ name, username, password })}>
-              <Text style={styles.loginText}>Sign Up</Text>
-            </TouchableOpacity>
-            <View style={{ flexDirection: 'column' }}>
-                <Text style={styles.orText}>OR</Text>
-            </View>
-            <View style={{ flexDirection: 'row', marginTop: 10 }}> 
-            
-            {/* <GoogleSigninButton
-              style={{ width: 192, height: 48 }}
-              size={GoogleSigninButton.Size.Wide}
-              color={GoogleSigninButton.Color.Dark}
-              onPress={this.signIn1} /> */}
+              <View style={{ flexDirection: 'column' }}>
+                  <Text style={styles.orText}>OR</Text>
+              </View>
+              <View style={{ flexDirection: 'row', marginTop: 10 }}> 
               
-              <Icon.Button
-                name="facebook"
-                backgroundColor="#3b5998"
-                onPress={() => alert('Login with Facebook')} />
+              {/* <GoogleSigninButton
+                style={{ width: 192, height: 48 }}
+                size={GoogleSigninButton.Size.Wide}
+                color={GoogleSigninButton.Color.Dark}
+                onPress={this.signIn1} /> */}
+                
+                <Icon.Button
+                  name="facebook"
+                  backgroundColor="#3b5998"
+                  onPress={() => alert('Login with Facebook')} />
+              </View>
+              <View style={styles.footerBottom}>
+                <Text style={styles.havAcc}>Already have an account? </Text>
+                <TouchableOpacity>
+                  <Text style={styles.bottomText} onPress={() => navigation.navigate('SignIn')}>Sign In</Text>
+                </TouchableOpacity>
+              </View>
+              
+              {/* <TouchableOpacity>
+                <Text style={styles.loginText} onPress={() => navigation.navigate('Registration')}>Signup</Text>
+              </TouchableOpacity>   */}
             </View>
-            <View style={styles.footerBottom}>
-              <Text style={styles.havAcc}>Already have an account? </Text>
-              <TouchableOpacity>
-                <Text style={styles.bottomText} onPress={() => navigation.navigate('SignIn')}>Sign In</Text>
-              </TouchableOpacity>
-            </View>
-            
-            {/* <TouchableOpacity>
-              <Text style={styles.loginText} onPress={() => navigation.navigate('Registration')}>Signup</Text>
-            </TouchableOpacity>   */}
-          </View>
-          
-        </View>        
+          </View>    
       </View>
     ); 
 }
 
 const styles = StyleSheet.create({
-  container: {
+  mainWrapper: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-    
   },
-  logo:{
-    width:500,
-    height:100,
-    backgroundColor: '#FF0000'
+  container: {
+    //flex: 1,
+    // width: '100%',
+    // alignItems: 'center',
+    // justifyContent: 'center'
+    width: '100%',
+    height: '100%',
+    backgroundColor: '#da3015',
+  },
+  headerContent: {
+    padding: 30,
+    paddingTop: 100,
+  },
+  headerTitle: {
+    color: '#ffffff',
+    fontSize: 25,
+    fontWeight: 'bold',
+    paddingBottom: 10,
+  },
+  headerText: {
+    color: '#ffffff',
+  },
+  formContainer: {
+    width: '100%',
+    height: '72%',
+    backgroundColor: '#ffffff',
+    borderTopRightRadius: 20,
+    borderTopLeftRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 5,
+    paddingBottom: 5,
   },
   inputView:{
-    width:"80%",
-    borderRadius:25,
+    width: '80%',
+    height: 50,
+    //borderRadius: 25,
     borderBottomColor: '#e7e7e7',
     borderBottomWidth: 2,
-    height:50,
-    marginBottom:20,
-    justifyContent:"center",
-    padding:20
+    marginBottom: 20,
+    justifyContent: 'center',
+    //padding: 20,
   },
   inputText:{
     height:50,
