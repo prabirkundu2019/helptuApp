@@ -9,6 +9,7 @@ import {
   View,
   ScrollView,
   ImageBackground,
+  ViewBase,
 } from 'react-native';
 //import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -48,107 +49,53 @@ export default function LoginScreen({navigation}) {
   return (
     <View style={styles.container}>
       <ImageBackground
-        //resizeMode="center"
-        style={styles.bgHeader}
+        resizeMode="cover"
+        style={styles.servDtlHeader}
         source={require('../assets/img/bg-header.jpeg')}>
-        <View style={styles.headerContent}>
-          <Text style={styles.headerTitle}>Welcome Back </Text>
-          <Text style={styles.headerText}>
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-            officia deserunt{' '}
-          </Text>
-        </View>
-        <View style={styles.formContainer}>
-          <ScrollView>
-            <View style={styles.flexWrapper}>
-              <View style={styles.inputView}>
-                <Input
-                  placeholder="Email"
-                  value={username}
-                  onChangeText={setUsername}
-                  leftIcon={{
-                    type: 'font-awesome',
-                    name: 'envelope',
-                    color: '#d73633',
-                    size: 15,
-                  }}
-                  style={styles.inputText}
-                  errorStyle={styles.errorStyle}
-                  //errorMessage="ENTER A VALID ERROR HERE"
-                />
-                <Input
-                  placeholder="Password"
-                  value={password}
-                  onChangeText={setPassword}
-                  leftIcon={{
-                    type: 'font-awesome',
-                    name: 'lock',
-                    color: '#d73633',
-                    size: 25,
-                  }}
-                  style={styles.inputText}
-                  errorStyle={styles.errorStyle}
-                  //errorMessage="ENTER A VALID ERROR HERE"
-                  secureTextEntry={true}
-                />
-              </View>
-              {/* <View style={styles.inputView}>
-                <TextInput
-                  placeholder="Email"
-                  value={username}
-                  onChangeText={setUsername}
-                  style={styles.inputText}
-                  placeholderStyle={styles.inputPlace}
-                />
-              </View>
-              <View style={styles.inputView}>
-                <TextInput
-                  placeholder="Password"
-                  value={password}
-                  style={styles.inputText}
-                  onChangeText={setPassword}
-                  secureTextEntry={true}
-                />
-              </View> */}
-              <View style={styles.forgotPass}>
-                <TouchableOpacity>
-                  <Text
-                    style={styles.forgotPassText}
-                    onPress={() => navigation.navigate('Registration')}>
-                    Forgot Password ?
-                  </Text>
-                </TouchableOpacity>
-              </View>
-              <TouchableOpacity
-                style={styles.loginBtn}
-                onPress={() => signIn({username, password})}>
-                <Text style={styles.loginText}>Sign In</Text>
-              </TouchableOpacity>
-              <View style={{flexDirection: 'column'}}>
-                <Text style={styles.orText}>OR</Text>
-              </View>
-              <View style={styles.socialRow}>
-                <Icon.Button
-                  style={styles.itemFacebook}
-                  name="facebook"
-                  backgroundColor="#3b5998"
-                  onPress={() => alert('Login with Facebook')}
-                />
-              </View>
-              <View style={styles.footerBottom}>
-                <Text style={styles.havAcc}>Don't have an account? </Text>
-                <TouchableOpacity>
-                  <Text
-                    style={styles.signUp}
-                    onPress={() => navigation.navigate('Registration')}>
-                    Sign Up
-                  </Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </ScrollView>
+        <View style={[styles.headerContent, styles.verticalItem]}>
+          <Image
+            style={styles.userCircleTop}
+            source={require('../assets/img/person-1.jpg')}
+            //imageStyle={{borderRadius: 40}}
+          />
+          <View>
+            <Text style={styles.userName}>Kate Wilson </Text>
+            <Text style={styles.userShortText}>Book a service </Text>
+          </View>
         </View>
       </ImageBackground>
+      <View style={styles.formContainer}>
+        <ScrollView>
+          <View style={styles.flexWrapper}>
+            <View style={styles.bookingDetails}>
+              <Text style={styles.titleMain}>Booking Details</Text>
+              <View style={[styles.formContainer, styles.bgLightGray]}>
+                <View style={styles.verticalItem}>
+                  <Text>Today</Text>
+                  <View style={[styles.mlAuto, styles.verticalItem]}>
+                    <Icon name="calendar" />
+                    <Text style={styles.ml_10}>Pick Date</Text>
+                  </View>
+                </View>
+                <View style={styles.verticalItem}>
+                  <Text>5:00 pm</Text>
+                  <View style={[styles.mlAuto, styles.verticalItem]}>
+                    <Icon name="clock-o" />
+                    <Text style={styles.ml_10}>Pick Time</Text>
+                  </View>
+                </View>
+              </View>
+            </View>
+            <View style={styles.bottomView}>
+              <TouchableOpacity
+                style={styles.bookBtn}
+                onPress={() => signUp({name, username, password})}>
+                <Text style={styles.loginText}>Book Now</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </ScrollView>
+      </View>
     </View>
   );
 }
@@ -157,31 +104,61 @@ const styles = StyleSheet.create({
   mainWrapper: {
     flex: 1,
   },
+  verticalItem: {
+    flexDirection: 'row',
+  },
+  horizontalItem: {
+    flexDirection: 'column',
+  },
+  userCircleTop: {
+    width: 62,
+    height: 62,
+    borderRadius: 50,
+    overflow: 'hidden',
+    marginRight: 10,
+  },
+  bgLightGray: {
+    backgroundColor: '#f4f4f4',
+  },
+  ml_10: {
+    marginLeft: 10,
+  },
+  mlAuto: {
+    marginLeft: 'auto',
+  },
   errorStyle: {
     color: 'red',
   },
   container: {
     flex: 1,
-    backgroundColor: '#da3015',
+    backgroundColor: '#ffffff',
   },
-  bgHeader: {
-    flex: 1,
+  servDtlHeader: {
+    flex: 0.5,
     width: '100%',
     height: '100%',
+    borderBottomLeftRadius: 50,
+    overflow: 'hidden',
   },
   headerContent: {
-    flex: 0.5,
-    justifyContent: 'flex-end',
+    //flex: 0.5,
+    //justifyContent: 'flex-start',
+    //alignItems: 'flex-end',
     paddingHorizontal: 15,
     paddingLeft: 30,
     paddingBottom: 50,
+    marginTop: 'auto',
   },
-  headerTitle: {
+  userName: {
     color: '#ffffff',
     fontSize: 35,
     fontWeight: 'bold',
-    paddingBottom: 10,
+    paddingBottom: 5,
     fontFamily: 'Circular Std Bold',
+  },
+  userShortText: {
+    color: '#ffffff',
+    fontSize: 20,
   },
   headerText: {
     width: '60%',
@@ -190,8 +167,8 @@ const styles = StyleSheet.create({
   formContainer: {
     flex: 1,
     backgroundColor: '#ffffff',
-    borderTopRightRadius: 20,
-    borderTopLeftRadius: 20,
+    /* borderTopRightRadius: 20,
+    borderTopLeftRadius: 20, */
     paddingHorizontal: 5,
     paddingVertical: 30,
   },
@@ -199,6 +176,32 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  bookingDetails: {
+    width: '100%',
+    textAlign: 'left',
+  },
+  textAcitve: {
+    color: '#8fd219',
+  },
+  titleMain: {
+    fontWeight: 'bold',
+    fontSize: 35,
+    marginBottom: 5,
+    color: '#404040',
+  },
+  decrip: {
+    marginBottom: 5,
+  },
+  rateHold: {
+    marginBottom: 25,
+  },
+  rateImg: {
+    marginTop: 10,
+  },
+  rateText: {
+    marginLeft: 10,
+    fontSize: 20,
   },
   inputView: {
     width: '100%',
@@ -215,16 +218,28 @@ const styles = StyleSheet.create({
   forgotPassText: {
     color: '#a4a4a4',
   },
-  loginBtn: {
+  bottomView: {
+    width: '100%',
+    //height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 50,
+    /* position: 'absolute',
+    bottom: 0, */
+  },
+  bookBtn: {
     width: '100%',
     //backgroundColor:"#FF0000",
     backgroundColor: '#da3015',
     borderRadius: 10,
-    height: 50,
+    paddingVertical: 20,
+    textAlign: 'center',
     alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 20,
-    marginBottom: 10,
+    marginTop: 'auto',
+    /* height: 50,
+    justifyContent: 'center', */
+    //marginTop: 20,
+    //marginBottom: 10,
   },
   loginText: {
     color: 'white',
