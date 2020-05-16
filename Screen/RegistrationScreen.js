@@ -175,7 +175,8 @@ const styles = StyleSheet.create({
   headerContent: {
     flex: 0.5,
     justifyContent: 'flex-end',
-    paddingHorizontal: 20,
+    paddingHorizontal: 15,
+    paddingLeft: 30,
     paddingBottom: 50,
   },
   headerTitle: {
@@ -194,7 +195,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
-    paddingHorizontal: 20,
+    paddingHorizontal: 5,
     paddingVertical: 30,
   },
   flexWrapper: {
