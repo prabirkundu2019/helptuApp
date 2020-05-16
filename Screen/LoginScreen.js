@@ -23,6 +23,7 @@ import {AuthContext} from '../App';
 import axios from 'axios';
 
 export default function LoginScreen({navigation}) {
+  const [name, setName] = React.useState('');
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [isLoading, setIsLoading] = React.useState(true);
@@ -69,7 +70,7 @@ export default function LoginScreen({navigation}) {
           <View style={styles.flexWrapper}>
             <View style={styles.bookingDetails}>
               <Text style={styles.titleMain}>Booking Details</Text>
-              <View style={[styles.formContainer, styles.bgLightGray]}>
+              <View style={[styles.formContainer, styles.bgLightGray, styles.px_10]}>
                 <View style={styles.verticalItem}>
                   <Text>Today</Text>
                   <View style={[styles.mlAuto, styles.verticalItem]}>
@@ -84,6 +85,84 @@ export default function LoginScreen({navigation}) {
                     <Text style={styles.ml_10}>Pick Time</Text>
                   </View>
                 </View>
+                <View style={styles.verticalItem}>
+                  <Text>How many hours</Text>
+                </View>
+                <View style={styles.verticalItem}>
+                  <Text>2 hrs</Text>
+                  <View style={[styles.mlAuto, styles.verticalItem]}>
+                    <TouchableOpacity>
+                      <Icon size={30} name="plus-square" />
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                      <Icon
+                        size={30}
+                        style={styles.ml_20}
+                        name="minus-square"
+                      />
+                    </TouchableOpacity>
+                  </View>
+                </View>
+                
+                <View style={styles.hr} />
+                
+                <View style={styles.verticalItem}>
+                  <Text>Bill</Text>
+                </View>
+                <View style={styles.verticalItem}>
+                  <Text>RPH : $40</Text>
+                  <View style={[styles.mlAuto]}>
+                    <Text style={styles.ml_10}>$40</Text>
+                  </View>
+                </View>
+                <View style={styles.verticalItem}>
+                  <Text>Service Fee : @25%</Text>
+                  <View style={[styles.mlAuto]}>
+                    <Text style={styles.ml_10}>$8</Text>
+                  </View>
+                </View>
+                <View style={styles.verticalItem}>
+                  <Text>Total Amount</Text>
+                  <View style={[styles.mlAuto]}>
+                    <Text style={styles.ml_10}>$48.00</Text>
+                  </View>
+                </View>
+              </View>
+              <View style={styles.formItem}>
+                <Text style={styles.label}>Name</Text>
+                <Input
+                  placeholder="Name"
+                  value={name}
+                  onChangeText={setName}
+                  style={styles.inputText}
+                  errorStyle={styles.errorStyle}
+                  //errorMessage="ENTER A VALID ERROR HERE"
+                  secureTextEntry={true}
+                />
+              </View>
+              <View style={styles.formItem}>
+                <Text style={styles.label}>Email</Text>
+                <Input
+                  placeholder="Email"
+                  value={username}
+                  onChangeText={setUsername}
+                  style={styles.inputText}
+                  errorStyle={styles.errorStyle}
+                  //errorMessage="ENTER A VALID ERROR HERE"
+                  secureTextEntry={true}
+                />
+              </View>
+              <View style={styles.formItem}>
+                <Text style={styles.label}>Phone Number</Text>
+                <Input
+                  placeholder="Phone No."
+                  value={username}
+                  onChangeText={username}
+                  style={styles.inputText}
+                  errorStyle={styles.errorStyle}
+                  //errorMessage="ENTER A VALID ERROR HERE"
+                  secureTextEntry={true}
+                />
               </View>
             </View>
             <View style={styles.bottomView}>
@@ -120,11 +199,25 @@ const styles = StyleSheet.create({
   bgLightGray: {
     backgroundColor: '#f4f4f4',
   },
+  hr: {
+    width: '90%',
+    margin: 10,
+    marginRight: 'auto',
+    marginLeft: 'auto',
+    borderBottomColor: 'black',
+    borderBottomWidth: 1,
+  },
   ml_10: {
     marginLeft: 10,
   },
+  ml_20: {
+    marginLeft: 20,
+  },
   mlAuto: {
     marginLeft: 'auto',
+  },
+  px_10: {
+    paddingHorizontal: 10,
   },
   errorStyle: {
     color: 'red',
