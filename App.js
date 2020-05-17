@@ -7,10 +7,13 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { DrawerActions } from '@react-navigation/native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import LoginScreen from './Screen/LoginScreen';
 import RegistrationScreen from './Screen/RegistrationScreen';
 import AllService from './Screen/AllService';
+import ServiceDetail from './Screen/ServiceDetail';
+import BookingScreen from './Screen/BookingScreen';
 
 import axios from 'axios';
 
@@ -29,15 +32,57 @@ const HomeStack = createStackNavigator();
 const HomeStackScreen = () => (
   <HomeStack.Navigator>
     <HomeStack.Screen name="Service" component={AllService}   options={{headerShown: false}} />
+    <HomeStack.Screen name="ServiceDetail" component={ServiceDetail}   options={{headerShown: true}} />
+    <HomeStack.Screen name="BookingScreen" component={BookingScreen}   options={{headerShown: false}} />
   </HomeStack.Navigator>
 );
 
 const TabsScreen = () => (
-  <Tabs.Navigator>
-    <Tabs.Screen name="Home" component={HomeStackScreen} />
-    <Tabs.Screen name="My Booking" component={HomeStackScreen} />
-    <Tabs.Screen name="Help" component={HomeStackScreen} />
-    <Tabs.Screen name="Profile" component={HomeStackScreen} />
+  <Tabs.Navigator
+    initialRouteName="Home"
+    activeColor= "#da3015"
+    inactiveColor="#000"
+  >
+    <Tabs.Screen 
+      name="Home" 
+      component={HomeStackScreen} 
+      options={{
+        tabBarLabel: 'Home',
+        tabBarIcon: ({ color }) => (
+          <MaterialCommunityIcons name="home" color={color} size={26} />
+        ),
+      }}
+    />
+    <Tabs.Screen 
+      name="My Booking" 
+      component={HomeStackScreen}
+      options={{
+        tabBarLabel: 'My Booking',
+        tabBarIcon: ({ color }) => (
+          <MaterialCommunityIcons name="book" color={color} size={26} />
+        ),
+      }}
+    />
+    <Tabs.Screen 
+      name="Help" 
+      component={HomeStackScreen}
+      options={{
+        tabBarLabel: 'Help',
+        tabBarIcon: ({ color }) => (
+          <MaterialCommunityIcons name="help" color={color} size={26} />
+        ),
+      }}
+    />
+    <Tabs.Screen 
+      name="Profile" 
+      component={HomeStackScreen} 
+      options={{
+        tabBarLabel: 'Profile',
+        tabBarIcon: ({ color }) => (
+          <MaterialCommunityIcons name="account" color={color} size={26} />
+        ),
+      }}
+    />
   </Tabs.Navigator>
 );
 

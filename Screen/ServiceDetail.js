@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {Component, PropTypes} from 'react';
 import {
   StyleSheet,
   TouchableOpacity,
@@ -7,92 +7,108 @@ import {
   TextInput,
   Image,
   View,
+  FlatList,
   ScrollView,
   ImageBackground,
 } from 'react-native';
-//import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {ListItem, SearchBar} from 'react-native-elements';
 import {Input} from 'react-native-elements';
 import AsyncStorage from '@react-native-community/async-storage';
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, StackActions} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createDrawerNavigator} from '@react-navigation/drawer';
+//import SQLite from "react-native-sqlite-2";
+//import { openDatabase } from 'react-native-sqlite-storage';
 import {AuthContext} from '../App';
-import axios from 'axios';
+//var SQLite = require('react-native-sqlite-storage');
 
-export default function LoginScreen({navigation}) {
-  const [username, setUsername] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [isLoading, setIsLoading] = React.useState(true);
-  const [userToken, setUserToken] = React.useState(null);
+//let db = openDatabase({ name: 'MetricsDatabase.db', location: 'Library', createFromLocation: '~MetricsDatabase.db'  });
+class ServiceDetail extends React.PureComponent {
+  constructor(props) {
+    super(props);
 
-  const {signIn} = React.useContext(AuthContext);
+    this.state = {
+      refreshing: false,
+      setRefreshing: false,
+      HeadTable: ['Company Name'],
+      company: [],
+      isListEnd: false,
+      fetching_from_server: false,
+      searchText: '',
+      demoArray: [1, 2, 3, 4],
+    };
+  }
 
-  // GoogleSignin.configure({
-  //   scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
-  //   webClientId: '770482334222-it2m5p0lrafa25gu8h5tmr4t1m5ch48a.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
-  // });
+  componentDidMount() {
+    //this.getDatarows();
+    //console.log(AsyncStorage.getItem("token"));
+    //this.loadMoreData();
+  }
 
-  signIn1 = async () => {
-    try {
-      await GoogleSignin.hasPlayServices();
-      const userInfo = await GoogleSignin.signIn();
-      console.log(userInfo);
-      this.setState({userInfo});
-    } catch (error) {
-      console.log(error);
-    }
+  renderHeader = () => {
+    return (
+      <SearchBar
+        placeholder="Type Here..."
+        lightTheme
+        round
+        editable={true}
+        value={this.state.searchText}
+        onChangeText={this.updateSearch}
+      />
+    );
   };
-
-  return (
-    <View style={styles.container}>
-      <ImageBackground
-        resizeMode="cover"
-        style={styles.servDtlHeader}
-        source={require('../assets/img/servDtl-banner.jpg')}>
-        <View style={styles.headerContent}>
-          {/* <Text style={styles.headerTitle}>Welcome Back </Text>
-          <Text style={styles.headerText}>
-            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
-            officia deserunt{' '}
-          </Text> */}
-        </View>
-        <View style={styles.formContainer}>
-          <ScrollView>
-            <View style={styles.flexWrapper}>
-              <View style={styles.item}>
-                <Text style={styles.title}>Mike West</Text>
-                <Text style={styles.decrip}>
-                  Excepteur sint occaecat cupidatat
-                </Text>
-                <View style={[styles.verticalItem, styles.rateHold]}>
-                  <Image
-                    style={styles.rateImg}
-                    source={require('../assets/img/starRate-3of4.png')}
-                  />
-                  <Text style={styles.rateText}>3.4</Text>
+  
+  render() {
+    return (
+      <View style={styles.container}>
+        <ImageBackground
+          resizeMode="cover"
+          style={styles.servDtlHeader}
+          source={require('../assets/img/servDtl-banner.jpg')}>
+          <View style={styles.headerContent}>
+            {/* <Text style={styles.headerTitle}>Welcome Back </Text>
+            <Text style={styles.headerText}>
+              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+              officia deserunt{' '}
+            </Text> */}
+          </View>
+          <View style={styles.formContainer}>
+            <ScrollView>
+              <View style={styles.flexWrapper}>
+                <View style={styles.item}>
+                  <Text style={styles.title}>Mike West</Text>
+                  <Text style={styles.decrip}>
+                    Excepteur sint occaecat cupidatat
+                  </Text>
+                  <View style={[styles.verticalItem, styles.rateHold]}>
+                    <Image
+                      style={styles.rateImg}
+                      source={require('../assets/img/starRate-3of4.png')}
+                    />
+                    <Text style={styles.rateText}>3.4</Text>
+                  </View>
+                  <Text style={{}}>Skil : Beautician</Text>
+                  <Text style={{}}>Cost : $ 250</Text>
+                  <View style={styles.verticalItem}>
+                    <Text style={styles.textAcitve}>Open Now</Text>
+                    <Text style={{}}> : 10am to 5pm </Text>
+                  </View>
                 </View>
-                <Text style={{}}>Skil : Beautician</Text>
-                <Text style={{}}>Cost : $ 250</Text>
-                <View style={styles.verticalItem}>
-                  <Text style={styles.textAcitve}>Open Now</Text>
-                  <Text style={{}}> : 10am to 5pm </Text>
+                <View style={styles.bottomView}>
+                  <TouchableOpacity
+                    style={styles.bookBtn}
+                    onPress={() => this.props.navigation.navigate('BookingScreen')}
+                  >
+                    <Text style={styles.loginText}>Book Now</Text>
+                  </TouchableOpacity>
                 </View>
               </View>
-              <View style={styles.bottomView}>
-                <TouchableOpacity
-                  style={styles.bookBtn}
-                  onPress={() => signUp({name, username, password})}>
-                  <Text style={styles.loginText}>Book Now</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-          </ScrollView>
-        </View>
-      </ImageBackground>
-    </View>
-  );
+            </ScrollView>
+          </View>
+        </ImageBackground>
+      </View>
+    );
+  };  
 }
 
 const styles = StyleSheet.create({
@@ -256,3 +272,6 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
   },
 });
+  
+
+export default ServiceDetail;

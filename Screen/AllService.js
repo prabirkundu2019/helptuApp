@@ -23,7 +23,7 @@ import {AuthContext} from '../App';
 //var SQLite = require('react-native-sqlite-storage');
 
 //let db = openDatabase({ name: 'MetricsDatabase.db', location: 'Library', createFromLocation: '~MetricsDatabase.db'  });
-class CompanyScreen extends React.PureComponent {
+class AllService extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -137,7 +137,13 @@ class CompanyScreen extends React.PureComponent {
                         <View style={[styles.mlAuto]}>
                           <View style={styles.ml_10}>
                             <Text style={styles.ml_10}>$40</Text>
+<<<<<<< HEAD
                             <TouchableOpacity>
+=======
+                            <TouchableOpacity
+                              onPress={() => this.props.navigation.navigate('ServiceDetail')}
+                            >
+>>>>>>> 93da152698d6c9f401e8e4acf26662d03eb9a0b6
                               <Icon
                                 size={20}
                                 style={styles.ml_20}
@@ -183,11 +189,21 @@ class CompanyScreen extends React.PureComponent {
                         <View style={[styles.mlAuto]}>
                           <View style={styles.ml_10}>
                             <Text style={styles.ml_10}>$40</Text>
+<<<<<<< HEAD
                             <TouchableOpacity>
                               <Icon
                                 size={20}
                                 style={styles.ml_20}
                                 name="long-arrow-right"
+=======
+                            <TouchableOpacity                              
+                              onPress={() => this.props.navigation.navigate('ServiceDetail')}
+                            >
+                              <Icon
+                                size={20}
+                                style={styles.ml_20}
+                                name="long-arrow-right"                                
+>>>>>>> 93da152698d6c9f401e8e4acf26662d03eb9a0b6
                               />
                             </TouchableOpacity>
                           </View>
@@ -229,7 +245,13 @@ class CompanyScreen extends React.PureComponent {
                         <View style={[styles.mlAuto]}>
                           <View style={styles.ml_10}>
                             <Text style={styles.ml_10}>$40</Text>
+<<<<<<< HEAD
                             <TouchableOpacity>
+=======
+                            <TouchableOpacity
+                              onPress={() => this.props.navigation.navigate('ServiceDetail')}
+                            >
+>>>>>>> 93da152698d6c9f401e8e4acf26662d03eb9a0b6
                               <Icon
                                 size={20}
                                 style={styles.ml_20}
@@ -489,4 +511,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CompanyScreen;
+export default AllService;
