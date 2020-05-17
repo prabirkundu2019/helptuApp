@@ -9,7 +9,6 @@ import {
   View,
   ScrollView,
   ImageBackground,
-  ViewBase,
 } from 'react-native';
 //import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -23,7 +22,6 @@ import {AuthContext} from '../App';
 import axios from 'axios';
 
 export default function LoginScreen({navigation}) {
-  const [name, setName] = React.useState('');
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [isLoading, setIsLoading] = React.useState(true);
@@ -50,131 +48,107 @@ export default function LoginScreen({navigation}) {
   return (
     <View style={styles.container}>
       <ImageBackground
-        resizeMode="cover"
-        style={styles.servDtlHeader}
+        //resizeMode="center"
+        style={styles.bgHeader}
         source={require('../assets/img/bg-header.jpeg')}>
-        <View style={[styles.headerContent, styles.verticalItem]}>
-          <Image
-            style={styles.userCircleTop}
-            source={require('../assets/img/person-1.jpg')}
-            //imageStyle={{borderRadius: 40}}
-          />
-          <View>
-            <Text style={styles.userName}>Kate Wilson </Text>
-            <Text style={styles.userShortText}>Book a service </Text>
-          </View>
+        <View style={styles.headerContent}>
+          <Text style={styles.headerTitle}>Welcome Back </Text>
+          <Text style={styles.headerText}>
+            Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+            officia deserunt{' '}
+          </Text>
         </View>
-      </ImageBackground>
-      <View style={styles.formContainer}>
-        <ScrollView>
-          <View style={styles.flexWrapper}>
-            <View style={styles.bookingDetails}>
-              <Text style={styles.titleMain}>Booking Details</Text>
-              <View style={[styles.formContainer, styles.bgLightGray, styles.px_10]}>
-                <View style={styles.verticalItem}>
-                  <Text>Today</Text>
-                  <View style={[styles.mlAuto, styles.verticalItem]}>
-                    <Icon name="calendar" />
-                    <Text style={styles.ml_10}>Pick Date</Text>
-                  </View>
-                </View>
-                <View style={styles.verticalItem}>
-                  <Text>5:00 pm</Text>
-                  <View style={[styles.mlAuto, styles.verticalItem]}>
-                    <Icon name="clock-o" />
-                    <Text style={styles.ml_10}>Pick Time</Text>
-                  </View>
-                </View>
-                <View style={styles.verticalItem}>
-                  <Text>How many hours</Text>
-                </View>
-                <View style={styles.verticalItem}>
-                  <Text>2 hrs</Text>
-                  <View style={[styles.mlAuto, styles.verticalItem]}>
-                    <TouchableOpacity>
-                      <Icon size={30} name="plus-square" />
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                      <Icon
-                        size={30}
-                        style={styles.ml_20}
-                        name="minus-square"
-                      />
-                    </TouchableOpacity>
-                  </View>
-                </View>
-                
-                <View style={styles.hr} />
-                
-                <View style={styles.verticalItem}>
-                  <Text>Bill</Text>
-                </View>
-                <View style={styles.verticalItem}>
-                  <Text>RPH : $40</Text>
-                  <View style={[styles.mlAuto]}>
-                    <Text style={styles.ml_10}>$40</Text>
-                  </View>
-                </View>
-                <View style={styles.verticalItem}>
-                  <Text>Service Fee : @25%</Text>
-                  <View style={[styles.mlAuto]}>
-                    <Text style={styles.ml_10}>$8</Text>
-                  </View>
-                </View>
-                <View style={styles.verticalItem}>
-                  <Text>Total Amount</Text>
-                  <View style={[styles.mlAuto]}>
-                    <Text style={styles.ml_10}>$48.00</Text>
-                  </View>
-                </View>
-              </View>
-              <View style={styles.formItem}>
-                <Text style={styles.label}>Name</Text>
-                <Input
-                  placeholder="Name"
-                  value={name}
-                  onChangeText={setName}
-                  style={styles.inputText}
-                  errorStyle={styles.errorStyle}
-                  //errorMessage="ENTER A VALID ERROR HERE"
-                  secureTextEntry={true}
-                />
-              </View>
-              <View style={styles.formItem}>
-                <Text style={styles.label}>Email</Text>
+        <View style={styles.formContainer}>
+          <ScrollView>
+            <View style={styles.flexWrapper}>
+              <View style={styles.inputView}>
                 <Input
                   placeholder="Email"
                   value={username}
                   onChangeText={setUsername}
+                  leftIcon={{
+                    type: 'font-awesome',
+                    name: 'envelope',
+                    color: '#d73633',
+                    size: 15,
+                  }}
                   style={styles.inputText}
                   errorStyle={styles.errorStyle}
                   //errorMessage="ENTER A VALID ERROR HERE"
-                  secureTextEntry={true}
                 />
-              </View>
-              <View style={styles.formItem}>
-                <Text style={styles.label}>Phone Number</Text>
                 <Input
-                  placeholder="Phone No."
-                  value={username}
-                  onChangeText={username}
+                  placeholder="Password"
+                  value={password}
+                  onChangeText={setPassword}
+                  leftIcon={{
+                    type: 'font-awesome',
+                    name: 'lock',
+                    color: '#d73633',
+                    size: 25,
+                  }}
                   style={styles.inputText}
                   errorStyle={styles.errorStyle}
                   //errorMessage="ENTER A VALID ERROR HERE"
                   secureTextEntry={true}
                 />
               </View>
-            </View>
-            <View style={styles.bottomView}>
+              {/* <View style={styles.inputView}>
+                <TextInput
+                  placeholder="Email"
+                  value={username}
+                  onChangeText={setUsername}
+                  style={styles.inputText}
+                  placeholderStyle={styles.inputPlace}
+                />
+              </View>
+              <View style={styles.inputView}>
+                <TextInput
+                  placeholder="Password"
+                  value={password}
+                  style={styles.inputText}
+                  onChangeText={setPassword}
+                  secureTextEntry={true}
+                />
+              </View> */}
+              <View style={styles.forgotPass}>
+                <TouchableOpacity>
+                  <Text
+                    style={styles.forgotPassText}
+                    onPress={() => navigation.navigate('Registration')}>
+                    Forgot Password ?
+                  </Text>
+                </TouchableOpacity>
+              </View>
               <TouchableOpacity
-                style={styles.bookBtn}
-                onPress={() => signUp({name, username, password})}>
-                <Text style={styles.loginText}>Book Now</Text>
+                style={styles.loginBtn}
+                onPress={() => signIn({username, password})}>
+                <Text style={styles.loginText}>Sign In</Text>
               </TouchableOpacity>
+              <View style={{flexDirection: 'column'}}>
+                <Text style={styles.orText}>OR</Text>
+              </View>
+              <View style={styles.socialRow}>
+                <Icon.Button
+                  style={styles.itemFacebook}
+                  name="facebook"
+                  backgroundColor="#3b5998"
+                  onPress={() => alert('Login with Facebook')}
+                />
+              </View>
+              <View style={styles.footerBottom}>
+                <Text style={styles.havAcc}>Don't have an account? </Text>
+                <TouchableOpacity>
+                  <Text
+                    style={styles.signUp}
+                    onPress={() => navigation.navigate('Registration')}>
+                    Sign Up
+                  </Text>
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
-        </ScrollView>
-      </View>
+          </ScrollView>
+        </View>
+      </ImageBackground>
     </View>
   );
 }
@@ -183,75 +157,31 @@ const styles = StyleSheet.create({
   mainWrapper: {
     flex: 1,
   },
-  verticalItem: {
-    flexDirection: 'row',
-  },
-  horizontalItem: {
-    flexDirection: 'column',
-  },
-  userCircleTop: {
-    width: 62,
-    height: 62,
-    borderRadius: 50,
-    overflow: 'hidden',
-    marginRight: 10,
-  },
-  bgLightGray: {
-    backgroundColor: '#f4f4f4',
-  },
-  hr: {
-    width: '90%',
-    margin: 10,
-    marginRight: 'auto',
-    marginLeft: 'auto',
-    borderBottomColor: 'black',
-    borderBottomWidth: 1,
-  },
-  ml_10: {
-    marginLeft: 10,
-  },
-  ml_20: {
-    marginLeft: 20,
-  },
-  mlAuto: {
-    marginLeft: 'auto',
-  },
-  px_10: {
-    paddingHorizontal: 10,
-  },
   errorStyle: {
     color: 'red',
   },
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#da3015',
   },
-  servDtlHeader: {
-    flex: 0.5,
+  bgHeader: {
+    flex: 1,
     width: '100%',
     height: '100%',
-    borderBottomLeftRadius: 50,
-    overflow: 'hidden',
   },
   headerContent: {
-    //flex: 0.5,
-    //justifyContent: 'flex-start',
-    //alignItems: 'flex-end',
+    flex: 0.5,
+    justifyContent: 'flex-end',
     paddingHorizontal: 15,
     paddingLeft: 30,
     paddingBottom: 50,
-    marginTop: 'auto',
   },
-  userName: {
+  headerTitle: {
     color: '#ffffff',
     fontSize: 35,
     fontWeight: 'bold',
-    paddingBottom: 5,
+    paddingBottom: 10,
     fontFamily: 'Circular Std Bold',
-  },
-  userShortText: {
-    color: '#ffffff',
-    fontSize: 20,
   },
   headerText: {
     width: '60%',
@@ -260,8 +190,8 @@ const styles = StyleSheet.create({
   formContainer: {
     flex: 1,
     backgroundColor: '#ffffff',
-    /* borderTopRightRadius: 20,
-    borderTopLeftRadius: 20, */
+    borderTopRightRadius: 20,
+    borderTopLeftRadius: 20,
     paddingHorizontal: 5,
     paddingVertical: 30,
   },
@@ -269,32 +199,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 30,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  bookingDetails: {
-    width: '100%',
-    textAlign: 'left',
-  },
-  textAcitve: {
-    color: '#8fd219',
-  },
-  titleMain: {
-    fontWeight: 'bold',
-    fontSize: 35,
-    marginBottom: 5,
-    color: '#404040',
-  },
-  decrip: {
-    marginBottom: 5,
-  },
-  rateHold: {
-    marginBottom: 25,
-  },
-  rateImg: {
-    marginTop: 10,
-  },
-  rateText: {
-    marginLeft: 10,
-    fontSize: 20,
   },
   inputView: {
     width: '100%',
@@ -311,28 +215,16 @@ const styles = StyleSheet.create({
   forgotPassText: {
     color: '#a4a4a4',
   },
-  bottomView: {
-    width: '100%',
-    //height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 50,
-    /* position: 'absolute',
-    bottom: 0, */
-  },
-  bookBtn: {
+  loginBtn: {
     width: '100%',
     //backgroundColor:"#FF0000",
     backgroundColor: '#da3015',
     borderRadius: 10,
-    paddingVertical: 20,
-    textAlign: 'center',
+    height: 50,
     alignItems: 'center',
-    marginTop: 'auto',
-    /* height: 50,
-    justifyContent: 'center', */
-    //marginTop: 20,
-    //marginBottom: 10,
+    justifyContent: 'center',
+    marginTop: 20,
+    marginBottom: 10,
   },
   loginText: {
     color: 'white',
