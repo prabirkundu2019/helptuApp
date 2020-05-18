@@ -142,7 +142,7 @@ class AllService extends React.PureComponent {
                     <Text>40 beautician are available near you</Text>
                   </View>
                   <TouchableOpacity style={styles.mlAuto}>
-                    <Text style={{marginTop: 'auto'}}>View</Text>
+                    <Text style={{marginTop: 'auto', color: '#da3015',}}>View</Text>
                   </TouchableOpacity>
                 </View>
 
