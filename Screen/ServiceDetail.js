@@ -57,7 +57,7 @@ class ServiceDetail extends React.PureComponent {
       />
     );
   };
-  
+
   render() {
     return (
       <View style={styles.container}>
@@ -76,7 +76,7 @@ class ServiceDetail extends React.PureComponent {
             <ScrollView>
               <View style={styles.flexWrapper}>
                 <View style={styles.item}>
-                  <Text style={styles.title}>Mike West</Text>
+                  <Text style={styles.userName}>Mike West</Text>
                   <Text style={styles.decrip}>
                     Excepteur sint occaecat cupidatat
                   </Text>
@@ -91,14 +91,16 @@ class ServiceDetail extends React.PureComponent {
                   <Text style={{}}>Cost : $ 250</Text>
                   <View style={styles.verticalItem}>
                     <Text style={styles.textAcitve}>Open Now</Text>
-                    <Text style={{}}> : 10am to 5pm </Text>
+                    <Text style={styles.textMute}> : 10am to 5pm </Text>
                   </View>
                 </View>
+
                 <View style={styles.bottomView}>
                   <TouchableOpacity
                     style={styles.bookBtn}
-                    onPress={() => this.props.navigation.navigate('BookingScreen')}
-                  >
+                    onPress={() =>
+                      this.props.navigation.navigate('BookingScreen')
+                    }>
                     <Text style={styles.loginText}>Book Now</Text>
                   </TouchableOpacity>
                 </View>
@@ -108,7 +110,7 @@ class ServiceDetail extends React.PureComponent {
         </ImageBackground>
       </View>
     );
-  };  
+  }
 }
 
 const styles = StyleSheet.create({
@@ -129,12 +131,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#da3015',
   },
   servDtlHeader: {
-    flex: 1,
+    //flex: 1,
     width: '100%',
     height: '100%',
   },
   headerContent: {
-    flex: 0.5,
+    //flex: 0.5,
+    height: '27%',
+    //height: 150,
     justifyContent: 'flex-end',
     paddingHorizontal: 15,
     paddingLeft: 30,
@@ -158,6 +162,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     paddingHorizontal: 5,
     paddingVertical: 30,
+    position: 'relative',
   },
   flexWrapper: {
     marginHorizontal: 30,
@@ -168,10 +173,13 @@ const styles = StyleSheet.create({
     width: '100%',
     textAlign: 'left',
   },
+  textMute: {
+    color: '#bbbbbb',
+  },
   textAcitve: {
     color: '#8fd219',
   },
-  title: {
+  userName: {
     fontWeight: 'bold',
     fontSize: 20,
     marginBottom: 5,
@@ -272,6 +280,5 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
   },
 });
-  
 
 export default ServiceDetail;
