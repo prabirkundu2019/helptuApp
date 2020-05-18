@@ -9,8 +9,10 @@ import {
   View,
   ScrollView,
   ImageBackground,
+  ActivityIndicator
 } from 'react-native';
 //import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
+
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Input} from 'react-native-elements';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -22,6 +24,7 @@ import {AuthContext} from '../App';
 import axios from 'axios';
 
 export default function LoginScreen({navigation}) {
+  
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [isLoading, setIsLoading] = React.useState(true);
@@ -58,9 +61,10 @@ export default function LoginScreen({navigation}) {
             officia deserunt{' '}
           </Text>
         </View>
-        <View style={styles.formContainer}>
+        <View style={styles.formContainer}>          
           <ScrollView>
             <View style={styles.flexWrapper}>
+              
               <View style={styles.inputView}>
                 <Input
                   placeholder="Email"
@@ -148,7 +152,7 @@ export default function LoginScreen({navigation}) {
             </View>
           </ScrollView>
         </View>
-      </ImageBackground>
+      </ImageBackground>      
     </View>
   );
 }

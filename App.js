@@ -8,9 +8,11 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { DrawerActions } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 import LoginScreen from './Screen/LoginScreen';
 import RegistrationScreen from './Screen/RegistrationScreen';
+import HomeScreen from './Screen/HomeScreen';
 import AllService from './Screen/AllService';
 import ServiceDetail from './Screen/ServiceDetail';
 import BookingScreen from './Screen/BookingScreen';
@@ -31,6 +33,7 @@ const HomeStack = createStackNavigator();
 
 const HomeStackScreen = () => (
   <HomeStack.Navigator>
+    <HomeStack.Screen name="Home" component={HomeScreen}   options={{headerShown: false}} />
     <HomeStack.Screen name="Service" component={AllService}   options={{headerShown: false}} />
     <HomeStack.Screen name="ServiceDetail" component={ServiceDetail}   options={{headerShown: true}} />
     <HomeStack.Screen name="BookingScreen" component={BookingScreen}   options={{headerShown: false}} />
@@ -167,15 +170,16 @@ const styles = StyleSheet.create({
 
 
 export default function App({ navigation }) {
+  const [spinner, setSpinner] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(true);
   const [userToken, setUserToken] = React.useState(null);
   const authContext = React.useMemo(
     () => ({
       signIn: async data => {
-        setIsLoading(true);
+        setSpinner(true);
         axios.post('https://carekro.com/helptu/index.php/api/login', data)
         .then(res=>{
-          setIsLoading(false);
+          setSpinner(false);
           if(res.data.status == 1)
           {
             setUserToken(res.data.token);
@@ -188,10 +192,10 @@ export default function App({ navigation }) {
       },
       signOut: () => setUserToken(null),
       signUp: async data => {
-        setIsLoading(true);
+        setSpinner(true);
         axios.post('https://carekro.com/helptu/index.php/api/registration', data)
         .then(res=>{
-          setIsLoading(false);
+          setSpinner(false);
           if(res.data.status == 1)
           {
             setUserToken(res.data.token);
@@ -205,6 +209,8 @@ export default function App({ navigation }) {
     }),
     []
   ); 
+
+  
   
   React.useEffect(() => {
     setTimeout(() => {
@@ -221,7 +227,13 @@ export default function App({ navigation }) {
   // }
 
   return (
+    
     <AuthContext.Provider value={authContext}>
+      <Spinner
+        visible={spinner}
+        textContent={'Loading...'}
+        textStyle={styles.spinnerTextStyle}
+      /> 
       <NavigationContainer>
         <RootStackScreen userToken={userToken} />
       </NavigationContainer>

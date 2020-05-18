@@ -23,7 +23,7 @@ import {AuthContext} from '../App';
 //var SQLite = require('react-native-sqlite-storage');
 
 //let db = openDatabase({ name: 'MetricsDatabase.db', location: 'Library', createFromLocation: '~MetricsDatabase.db'  });
-class AllService extends React.PureComponent {
+class Home extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -169,7 +169,7 @@ class AllService extends React.PureComponent {
                             marginLeft: 20,
                           }}
                           onPress={() =>
-                            this.props.navigation.navigate('ServiceDetail')
+                            this.props.navigation.navigate('Service')
                           }>
                           <Icon
                             size={20}
@@ -217,7 +217,7 @@ class AllService extends React.PureComponent {
                             marginLeft: 20,
                           }}
                           onPress={() =>
-                            this.props.navigation.navigate('ServiceDetail')
+                            this.props.navigation.navigate('Service')
                           }>
                           <Icon
                             size={20}
@@ -264,7 +264,7 @@ class AllService extends React.PureComponent {
                             marginLeft: 20,
                           }}
                           onPress={() =>
-                            this.props.navigation.navigate('ServiceDetail')
+                            this.props.navigation.navigate('Service')
                           }>
                           <Icon
                             size={20}
@@ -311,7 +311,7 @@ class AllService extends React.PureComponent {
                             marginLeft: 20,
                           }}
                           onPress={() =>
-                            this.props.navigation.navigate('ServiceDetail')
+                            this.props.navigation.navigate('Service')
                           }>
                           <Icon
                             size={20}
@@ -604,4 +604,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AllService;
+export default Home;
