@@ -49,56 +49,65 @@ class BookingScreen extends React.PureComponent {
     console.log(this.props);
     return (
       <View style={styles.container}>
-        <ImageBackground
-          resizeMode="cover"
-          style={styles.servDtlHeader}
-          source={require('../assets/img/bg-header.jpeg')}>
-          <View style={[styles.headerContent, styles.verticalItem]}>
-            <Image
-              style={styles.userCircleTop}
-              source={require('../assets/img/person-1.jpg')}
-              //imageStyle={{borderRadius: 40}}
-            />
-            <View>
-              <Text style={styles.userName}>Kate Wilson </Text>
-              <Text style={styles.userShortText}>Book a service </Text>
+        <ScrollView>
+          <ImageBackground
+            resizeMode="cover"
+            style={styles.servDtlHeader}
+            source={require('../assets/img/bg-header.jpeg')}>
+            <View style={[styles.headerContent, styles.verticalItem]}>
+              <Image
+                style={styles.userCircleTop}
+                source={require('../assets/img/person-1.jpg')}
+                //imageStyle={{borderRadius: 40}}
+              />
+              <View>
+                <Text style={styles.userName}>Kate Wilson </Text>
+                <Text style={styles.userShortText}>Book a service </Text>
+              </View>
             </View>
-          </View>
-        </ImageBackground>
-        <View style={styles.formContainer}>
-          <ScrollView>
+          </ImageBackground>
+          <View style={styles.formContainer}>
             <View style={styles.flexWrapper}>
               <View style={styles.bookingDetails}>
                 <Text style={styles.titleMain}>Booking Details</Text>
-                <View style={[styles.formContainer, styles.bgLightGray, styles.px_10]}>
-                  <View style={styles.verticalItem}>
-                    <Text>Today</Text>
+                <View
+                  style={[
+                    styles.formContainer,
+                    styles.bgLightGray,
+                    styles.px_10,
+                  ]}>
+                  <View style={[styles.verticalItem, styles.mb_5]}>
+                    <Text style={styles.bookBold}>Today</Text>
                     <View style={[styles.mlAuto, styles.verticalItem]}>
                       <Icon name="calendar" />
                       <Text style={styles.ml_10}>Pick Date</Text>
                     </View>
                   </View>
-                  <View style={styles.verticalItem}>
-                    <Text>5:00 pm</Text>
+                  <View style={[styles.verticalItem, styles.mb_5]}>
+                    <Text style={styles.bookBold}>5:00 pm</Text>
                     <View style={[styles.mlAuto, styles.verticalItem]}>
                       <Icon name="clock-o" />
                       <Text style={styles.ml_10}>Pick Time</Text>
                     </View>
                   </View>
-                  <View style={styles.verticalItem}>
-                    <Text>How many hours</Text>
+                  <View style={[styles.verticalItem, styles.mb_5]}>
+                    <Text style={styles.bookTextLight}>How many hours</Text>
                   </View>
-                  <View style={styles.verticalItem}>
-                    <Text>2 hrs</Text>
+                  <View style={[styles.verticalItem, styles.mb_5]}>
+                    <Text style={styles.bookBold}>2 hrs</Text>
                     <View style={[styles.mlAuto, styles.verticalItem]}>
                       <TouchableOpacity>
-                        <Icon size={30} name="plus-square" />
+                        <Icon
+                          size={20}
+                          style={styles.bookRoundIcon}
+                          name="plus"
+                        />
                       </TouchableOpacity>
                       <TouchableOpacity>
                         <Icon
-                          size={30}
-                          style={styles.ml_20}
-                          name="minus-square"
+                          size={20}
+                          style={[styles.bookRoundIcon, styles.ml_20]}
+                          name="minus"
                         />
                       </TouchableOpacity>
                     </View>
@@ -106,56 +115,51 @@ class BookingScreen extends React.PureComponent {
                   
                   <View style={styles.hr} />
                   
-                  <View style={styles.verticalItem}>
-                    <Text>Bill</Text>
+                  <View style={[styles.verticalItem, styles.mb_5]}>
+                    <Text style={styles.bookTextLight}>Bill</Text>
                   </View>
-                  <View style={styles.verticalItem}>
-                    <Text>RPH : $40</Text>
+                  <View style={[styles.verticalItem, styles.mb_5]}>
+                    <Text style={styles.bookTextLight}>RPH : $40</Text>
                     <View style={[styles.mlAuto]}>
                       <Text style={styles.ml_10}>$40</Text>
                     </View>
                   </View>
-                  <View style={styles.verticalItem}>
-                    <Text>Service Fee : @25%</Text>
+                  <View style={[styles.verticalItem, styles.mb_5]}>
+                    <Text style={styles.bookTextLight}>Service Fee : @25%</Text>
                     <View style={[styles.mlAuto]}>
                       <Text style={styles.ml_10}>$8</Text>
                     </View>
                   </View>
                   <View style={styles.verticalItem}>
-                    <Text>Total Amount</Text>
-                    <View style={[styles.mlAuto]}>
-                      <Text style={styles.ml_10}>$48.00</Text>
+                    <Text style={styles.bookBold}>Total Amount</Text>
+                    <View style={styles.mlAuto}>
+                      <Text style={[styles.bookBold, styles.ml_10]}>
+                        $48.00
+                      </Text>
                     </View>
                   </View>
                 </View>
                 <View style={styles.formItem}>
-                  <Text style={styles.label}>Name</Text>
-                  <Input
-                    placeholder="Name"
-                  />
+                  <Text style={styles.formInputLabel}>Name</Text>
+                  <Input style={styles.formInput} placeholder="Name" />
                 </View>
                 <View style={styles.formItem}>
-                  <Text style={styles.label}>Email</Text>
-                  <Input
-                    placeholder="Email"
-                  />
+                  <Text style={styles.formInputLabel}>Email</Text>
+                  <Input style={styles.formInput} placeholder="Email" />
                 </View>
                 <View style={styles.formItem}>
-                  <Text style={styles.label}>Phone Number</Text>
-                  <Input
-                    placeholder="Phone No."
-                  />
+                  <Text style={styles.formInputLabel}>Phone Number</Text>
+                  <Input style={styles.formInput} placeholder="Phone No." />
                 </View>
               </View>
               <View style={styles.bottomView}>
-                <TouchableOpacity
-                  style={styles.bookBtn}>
+                <TouchableOpacity style={styles.bookBtn}>
                   <Text style={styles.loginText}>Book Now</Text>
                 </TouchableOpacity>
               </View>
             </View>
-          </ScrollView>
-        </View>
+          </View>
+        </ScrollView>
       </View>
     );
   }
@@ -186,8 +190,11 @@ const styles = StyleSheet.create({
     margin: 10,
     marginRight: 'auto',
     marginLeft: 'auto',
-    borderBottomColor: 'black',
+    borderBottomColor: '#707070',
     borderBottomWidth: 1,
+  },
+  mb_5: {
+    marginBottom: 5,
   },
   ml_10: {
     marginLeft: 10,
@@ -208,27 +215,38 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#ffffff',
   },
+  bookBold: {
+    fontWeight: 'bold',
+    fontSize: 22,
+  },
+  bookRoundIcon: {
+    backgroundColor: '#da3015',
+    color: '#fff',
+    paddingVertical: 8,
+    paddingHorizontal: 10,
+    borderRadius: 50,
+  },
   servDtlHeader: {
-    flex: 0.5,
+    //flex: 0.5,
     width: '100%',
-    height: '100%',
+    height: 200,
     borderBottomLeftRadius: 50,
     overflow: 'hidden',
   },
   headerContent: {
-    //flex: 0.5,
-    //justifyContent: 'flex-start',
-    //alignItems: 'flex-end',
     paddingHorizontal: 15,
     paddingLeft: 30,
     paddingBottom: 50,
     marginTop: 'auto',
   },
+  bookTextLight: {
+    color: '#6d6d6d',
+  },
   userName: {
     color: '#ffffff',
-    fontSize: 35,
+    fontSize: 30,
     fontWeight: 'bold',
-    paddingBottom: 5,
+    paddingBottom: 2,
     fontFamily: 'Circular Std Bold',
   },
   userShortText: {
@@ -261,8 +279,8 @@ const styles = StyleSheet.create({
   },
   titleMain: {
     fontWeight: 'bold',
-    fontSize: 35,
-    marginBottom: 5,
+    fontSize: 25,
+    marginBottom: 15,
     color: '#404040',
   },
   decrip: {
@@ -292,6 +310,20 @@ const styles = StyleSheet.create({
   },
   forgotPassText: {
     color: '#a4a4a4',
+  },
+  formItem: {
+    backgroundColor: 'transparent',
+    marginHorizontal: -5,
+    marginTop: 10,
+  },
+  formInputLabel: {
+    paddingHorizontal: 15,
+    color: '#6d6d6d',
+  },
+  formInput: {
+    marginHorizontal: -10,
+    backgroundColor: '#000000',
+    marginTop: -10,
   },
   bottomView: {
     width: '100%',
