@@ -12,7 +12,7 @@ import {
   ImageBackground,
 } from 'react-native';
 import { connect } from 'react-redux';
-import { getServices } from '../src/actions/service';
+import { getProviders } from '../src/actions/service';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {ListItem, SearchBar} from 'react-native-elements';
 import {Input} from 'react-native-elements';
@@ -25,7 +25,7 @@ import {AuthContext} from '../App';
 //var SQLite = require('react-native-sqlite-storage');
 
 //let db = openDatabase({ name: 'MetricsDatabase.db', location: 'Library', createFromLocation: '~MetricsDatabase.db'  });
-class AllService extends React.PureComponent {
+class ServiceProvider extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -45,7 +45,7 @@ class AllService extends React.PureComponent {
     //this.getDatarows();
     //console.log(AsyncStorage.getItem("token"));
     //this.loadMoreData();
-    this.props.getServices();
+    this.props.getProviders(this.props.route.params.service_id);
   }
 
   renderHeader = () => {
@@ -63,9 +63,8 @@ class AllService extends React.PureComponent {
 
   render() {
     console.log(this.props);
-    let mainServices = this.props.services.map((service, index) => {
-      let serviceImage = {uri: 'https://carekro.com/helptu/new_admin/uploads/'+service.service_image}
-      return(
+    let providers = this.props.providers.map((provider, index) => {
+      return (
         <View
           style={[
             styles.formContainer,
@@ -75,19 +74,40 @@ class AllService extends React.PureComponent {
           ]}>
           <View style={styles.verticalItem}>
             <Image
-              style={[styles.userCircleLeft]}
-              source={serviceImage}
+              style={[styles.userCircleTop]}
+              source={require('../assets/img/person-2.png')}
               //imageStyle={{borderRadius: 40}}
             />
+
             <View style={{width: 150, marginLeft: 10}}>
-              <Text style={styles.servItemTitle}>{service.service_name} </Text>
-              <Text style={{}}>{service.service_description} </Text>
+              <Text style={styles.servItemTitle}>{provider.name} </Text>
+              <Text style={{}}>Excepteur sint occaecat cupidatat </Text>
+              <View style={[styles.verticalItem, styles.rateHold]}>
+                <Image
+                  style={styles.rateImg}
+                  source={require('../assets/img/star-1.png')}
+                />
+                <Text style={styles.rateText}>3.2</Text>
+              </View>
             </View>
 
             <View style={[styles.mlAuto]}>
               <View style={styles.ml_10}>
+                {/* <Text style={styles.ml_10}>$40</Text> */}
+                <View
+                  style={[
+                    styles.verticalItem,
+                    styles.mb_20,
+                    styles.ml_20,
+                  ]}>
+                  <Icon
+                    style={styles.mr_10}
+                    size={15}
+                    name="map-marker"
+                  />
+                  <Text style={[styles.mr_10]}>1.2</Text>
+                </View>
                 <TouchableOpacity
-                  // eslint-disable-next-line react-native/no-inline-styles
                   style={{
                     height: 40,
                     width: 40,
@@ -98,7 +118,7 @@ class AllService extends React.PureComponent {
                     marginLeft: 20,
                   }}
                   onPress={() =>
-                    this.props.navigation.navigate('ServiceProvider', {service_id: service.service_id})
+                    this.props.navigation.navigate('ServiceDetail')
                   }>
                   <Icon
                     size={20}
@@ -109,7 +129,6 @@ class AllService extends React.PureComponent {
                 </TouchableOpacity>
               </View>
             </View>
-            
           </View>
         </View>
       )
@@ -190,7 +209,16 @@ class AllService extends React.PureComponent {
           <View style={styles.formContainer}>
             <View style={styles.flexWrapper}>
               <View style={styles.bookingDetails}>
-                {mainServices}
+                <View style={[styles.verticalItem, styles.mb_20]}>
+                  <View>
+                    <Text style={styles.titleMain}>{this.props.service.service_name}</Text>
+                    <Text>{this.props.totalProvider} beautician are available near you</Text>
+                  </View>
+                  <TouchableOpacity style={styles.mlAuto}>
+                    <Text style={{marginTop: 'auto', color: '#da3015',}}>View</Text>
+                  </TouchableOpacity>
+                </View>
+                {providers}
               </View>
             </View>
           </View>
@@ -236,31 +264,12 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     marginRight: 10,
   },
-  userCircleLeft: {
-    width: 62,
-    height: 62,
-    borderRadius: 10,
-    overflow: 'hidden',
-    marginRight: 10,
-  },
   servItemTitle: {
     fontSize: 18,
     fontWeight: 'bold',
   },
   bgLightGray: {
     backgroundColor: '#f4f4f4',
-  },
-  bgYellow: {
-    backgroundColor: '#fffaeb',
-  },
-  bgOrange: {
-    backgroundColor: '#fff3f1',
-  },
-  bgViolet: {
-    backgroundColor: '#fef2fd',
-  },
-  bgBlue: {
-    backgroundColor: '#eff4ff',
   },
   hr: {
     width: '90%',
@@ -336,7 +345,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20, */
     paddingHorizontal: 5,
     paddingVertical: 30,
-    //paddingBottom: 10,
+    paddingBottom: 10,
   },
   flexWrapper: {
     marginHorizontal: 30,
@@ -454,9 +463,11 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  services: state.service.service
+  providers: state.service.providers,
+  service: state.service.serviceData,
+  totalProvider: state.service.totalProvider
 });
 const mapDispatchToProps = {
-  getServices
+  getProviders
 }
-export default connect(mapStateToProps, mapDispatchToProps)(AllService);
+export default connect(mapStateToProps, mapDispatchToProps)(ServiceProvider);

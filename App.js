@@ -14,6 +14,7 @@ import LoginScreen from './Screen/LoginScreen';
 import RegistrationScreen from './Screen/RegistrationScreen';
 import HomeScreen from './Screen/HomeScreen';
 import AllService from './Screen/AllService';
+import ServiceProvider from './Screen/ServiceProvider';
 import ServiceDetail from './Screen/ServiceDetail';
 import BookingScreen from './Screen/BookingScreen';
 
@@ -35,6 +36,7 @@ const HomeStackScreen = () => (
   <HomeStack.Navigator>
     <HomeStack.Screen name="Home" component={HomeScreen}   options={{headerShown: false}} />
     <HomeStack.Screen name="Service" component={AllService}   options={{headerShown: false}} />
+    <HomeStack.Screen name="ServiceProvider" component={ServiceProvider}   options={{headerShown: false}} />
     <HomeStack.Screen name="ServiceDetail" component={ServiceDetail}   options={{headerShown: true}} />
     <HomeStack.Screen name="BookingScreen" component={BookingScreen}   options={{headerShown: false}} />
   </HomeStack.Navigator>

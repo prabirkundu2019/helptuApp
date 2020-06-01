@@ -23,7 +23,7 @@ import {AuthContext} from '../App';
 //var SQLite = require('react-native-sqlite-storage');
 
 //let db = openDatabase({ name: 'MetricsDatabase.db', location: 'Library', createFromLocation: '~MetricsDatabase.db'  });
-class Home extends React.PureComponent {
+class HomeScreen extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -76,273 +76,24 @@ class Home extends React.PureComponent {
                 />
                 <View>
                   <Text style={styles.userName}>Hi, Kate </Text>
-                  <Text style={styles.userShortText}>Need help ? </Text>
-                </View>
-              </View>
-              <View style={styles.horizontalItem}>
-                {/* <SearchBar
-                placeholder="Type Here..."
-                lightTheme
-                round
-                editable={true}
-                value={this.state.searchText}
-                onChangeText={this.updateSearch}
-              /> */}
-                <SearchBar
-                  placeholder="Search for services"
-                  lightTheme
-                  inputStyle={{backgroundColor: 'white'}}
-                  //rightIconContainerStyle={{backgroundColor: 'white',}}
-                  //leftIconContainerStyle={{backgroundColor: 'red', padding: 0,}}
-                  round
-                  searchIcon={true}
-                  placeholderTextColor={'#c6c6c6'}
-                  style={{marginLeft: 0}}
-                  containerStyle={{
-                    backgroundColor: 'transparent',
-                    //borderWidth: 0,
-                    //backgroundColor: 'white',
-                    borderWidth: 0, //no effect
-                    shadowColor: 'white', //no effect
-                    borderBottomColor: 'transparent',
-                    borderTopColor: 'transparent',
-                    marginLeft: -10,
-                    //borderRadius: 50
-                  }}
-                  //inputStyle={{backgroundColor: 'white'}}
-                  //placeholderTextColor={'#g5g5g5'}
-                  editable={true}
-                  value={this.state.searchText}
-                  onChangeText={this.updateSearch}
-                />
-                <View style={styles.verticalItem}>
-                  <Icon
-                    style={[styles.textWhite, styles.mr_10]}
-                    size={25}
-                    name="map-marker"
-                  />
-                  <Text style={[styles.userShortText, styles.mr_10]}>
-                    28, Dixon lane Kolkata
-                  </Text>
-                  <Icon
-                    style={[styles.textWhite, styles.mr_10]}
-                    size={25}
-                    name="angle-down"
-                  />
                 </View>
               </View>
             </View>
           </ImageBackground>
           <View style={styles.formContainer}>
             <View style={styles.flexWrapper}>
-              <View style={styles.bookingDetails}>
-
-                <View
-                  style={[
-                    styles.formContainer,
-                    styles.bgYellow,
-                    styles.px_10,
-                    styles.mb_20,
-                  ]}>
-                  <View style={styles.verticalItem}>
-                    <Image
-                      style={[styles.userCircleLeft]}
-                      source={require('../assets/img/Pet.jpg')}
-                      //imageStyle={{borderRadius: 40}}
-                    />
-                    <View style={{width: 150, marginLeft: 10}}>
-                      <Text style={styles.servItemTitle}>Pet Services </Text>
-                      <Text style={{}}>Excepteur sint occaecat cupidatat </Text>
-                    </View>
-
-                    <View style={[styles.mlAuto]}>
-                      <View style={styles.ml_10}>
-                        <TouchableOpacity
-                          // eslint-disable-next-line react-native/no-inline-styles
-                          style={{
-                            height: 40,
-                            width: 40,
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            backgroundColor: '#e7bb2e',
-                            borderRadius: 50,
-                            marginLeft: 20,
-                          }}
-                          onPress={() =>
-                            this.props.navigation.navigate('Service')
-                          }>
-                          <Icon
-                            size={20}
-                            //style={styles.ml_20}
-                            name="long-arrow-right"
-                            color="white"
-                          />
-                        </TouchableOpacity>
-                      </View>
-                    </View>
-                    
-                  </View>
-                </View>
-
-
-                <View
-                  style={[
-                    styles.formContainer,
-                    styles.bgOrange,
-                    styles.px_10,
-                    styles.mb_20,
-                  ]}>
-                  <View style={styles.verticalItem}>
-                    <Image
-                      style={[styles.userCircleLeft]}
-                      source={require('../assets/img/Garden.jpg')}
-                      //imageStyle={{borderRadius: 40}}
-                    />
-                    <View style={{width: 150, marginLeft: 10}}>
-                      <Text style={styles.servItemTitle}>Garden Services </Text>
-                      <Text style={{}}>Excepteur sint occaecat cupidatat </Text>
-                    </View>
-
-                    <View style={[styles.mlAuto]}>
-                      <View style={styles.ml_10}>
-                        <TouchableOpacity
-                          // eslint-disable-next-line react-native/no-inline-styles
-                          style={{
-                            height: 40,
-                            width: 40,
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            backgroundColor: '#da3015',
-                            borderRadius: 50,
-                            marginLeft: 20,
-                          }}
-                          onPress={() =>
-                            this.props.navigation.navigate('Service')
-                          }>
-                          <Icon
-                            size={20}
-                            //style={styles.ml_20}
-                            name="long-arrow-right"
-                            color="white"
-                          />
-                        </TouchableOpacity>
-                      </View>
-                    </View>
-                    
-                  </View>
-                </View>
-
-                <View
-                  style={[
-                    styles.formContainer,
-                    styles.bgViolet,
-                    styles.px_10,
-                    styles.mb_20,
-                  ]}>
-                  <View style={styles.verticalItem}>
-                    <Image
-                      style={[styles.userCircleLeft]}
-                      source={require('../assets/img/Fitness.jpg')}
-                      //imageStyle={{borderRadius: 40}}
-                    />
-                    <View style={{width: 150, marginLeft: 10}}>
-                      <Text style={styles.servItemTitle}>Fitness Services </Text>
-                      <Text style={{}}>Excepteur sint occaecat cupidatat </Text>
-                    </View>
-
-                    <View style={[styles.mlAuto]}>
-                      <View style={styles.ml_10}>
-                        <TouchableOpacity
-                          // eslint-disable-next-line react-native/no-inline-styles
-                          style={{
-                            height: 40,
-                            width: 40,
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            backgroundColor: '#b92eb5',
-                            borderRadius: 50,
-                            marginLeft: 20,
-                          }}
-                          onPress={() =>
-                            this.props.navigation.navigate('Service')
-                          }>
-                          <Icon
-                            size={20}
-                            //style={styles.ml_20}
-                            name="long-arrow-right"
-                            color="white"
-                          />
-                        </TouchableOpacity>
-                      </View>
-                    </View>
-                    
-                  </View>
-                </View>
-
-                <View
-                  style={[
-                    styles.formContainer,
-                    styles.bgBlue,
-                    styles.px_10,
-                    styles.mb_20,
-                  ]}>
-                  <View style={styles.verticalItem}>
-                    <Image
-                      style={[styles.userCircleLeft]}
-                      source={require('../assets/img/Food.jpg')}
-                      //imageStyle={{borderRadius: 40}}
-                    />
-                    <View style={{width: 150, marginLeft: 10}}>
-                      <Text style={styles.servItemTitle}>Food Services </Text>
-                      <Text style={{}}>Excepteur sint occaecat cupidatat </Text>
-                    </View>
-
-                    <View style={[styles.mlAuto]}>
-                      <View style={styles.ml_10}>
-                        <TouchableOpacity
-                          // eslint-disable-next-line react-native/no-inline-styles
-                          style={{
-                            height: 40,
-                            width: 40,
-                            justifyContent: 'center',
-                            alignItems: 'center',
-                            backgroundColor: '#235cda',
-                            borderRadius: 50,
-                            marginLeft: 20,
-                          }}
-                          onPress={() =>
-                            this.props.navigation.navigate('Service')
-                          }>
-                          <Icon
-                            size={20}
-                            //style={styles.ml_20}
-                            name="long-arrow-right"
-                            color="white"
-                          />
-                        </TouchableOpacity>
-                      </View>
-                    </View>
-                    
-                  </View>
-                </View>
-
-                {/* <View style={styles.MainContainer}>
-                <FlatList
-                keyExtractor={(item, index) => index.toString()}
-                data={this.state.demoArray}
-                renderItem={({item, index}) => (
-                    <ListItem
-                    title="Test1"
-                    containerStyle={{borderBottomWidth: 0}}
-                    chevron
-                    />
-                )}
-                keyExtractor={item => item.so_header_id}
-                ItemSeparatorComponent={this.renderSeparator}
-                ListHeaderComponent={this.renderHeader}
-                />
-            </View> */}
-              </View>
+              <TouchableOpacity
+                style={styles.designBtn}
+                onPress={() => this.props.navigation.navigate('Service')}>
+                <Text style={styles.loginText}>Service Provider</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.designBtn}
+                onPress={() => this.props.navigation.navigate('Service')}>
+                <Text style={styles.loginText}>Service Seeker</Text>
+              </TouchableOpacity>
+              {/* <View style={styles.btnCenter}>
+              </View> */}
             </View>
           </View>
         </ScrollView>
@@ -450,9 +201,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   },
   servDtlHeader: {
-    //flex: 0.5,
+    flex: 1,
     width: '100%',
-    height: 250,
+    height: 150,
     borderBottomLeftRadius: 50,
     overflow: 'hidden',
   },
@@ -482,21 +233,30 @@ const styles = StyleSheet.create({
   },
   formContainer: {
     flex: 1,
+    //width: '100%',
+    height: 450,
     backgroundColor: '#ffffff',
-    /* borderTopRightRadius: 20,
-    borderTopLeftRadius: 20, */
     paddingHorizontal: 5,
     paddingVertical: 30,
-    //paddingBottom: 10,
+    justifyContent: 'center',
+    //backgroundColor: '#333333',
   },
   flexWrapper: {
+    //width: '100%',
+    height: '100%',
     marginHorizontal: 30,
-    alignItems: 'center',
+    //alignItems: 'center',
     justifyContent: 'center',
+    marginVertical: 'auto',
+    //backgroundColor: '#ffffff',
   },
-  bookingDetails: {
-    width: '100%',
-    textAlign: 'left',
+  btnCenter: {
+    //display: 'flex',
+    //width: '100%',
+    //textAlign: 'left',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   textAcitve: {
     color: '#8fd219',
@@ -544,29 +304,20 @@ const styles = StyleSheet.create({
     /* position: 'absolute',
     bottom: 0, */
   },
-  bookBtn: {
+  designBtn: {
     width: '100%',
+    height: 50,
     //backgroundColor:"#FF0000",
     backgroundColor: '#da3015',
     borderRadius: 10,
-    paddingVertical: 20,
-    textAlign: 'center',
     alignItems: 'center',
-    marginTop: 'auto',
-    /* height: 50,
-    justifyContent: 'center', */
-    //marginTop: 20,
-    //marginBottom: 10,
+    justifyContent: 'center',
+    marginTop: 20,
+    marginBottom: 10,
   },
   loginText: {
     color: 'white',
   },
-  /* forgotPass: {
-    paddingRight: 20,
-    color: '#a4a4a4',
-    marginRight: 35,
-    marginBottom: 0,
-  }, */
   socialRow: {
     flexDirection: 'row',
     marginTop: 10,
@@ -604,4 +355,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default HomeScreen;

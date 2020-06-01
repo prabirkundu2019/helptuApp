@@ -11,6 +11,7 @@ import {
   ScrollView,
   ImageBackground,
 } from 'react-native';
+import DateTimePicker from '@react-native-community/datetimepicker';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {ListItem, SearchBar} from 'react-native-elements';
 import {Input} from 'react-native-elements';
@@ -28,14 +29,13 @@ class BookingScreen extends React.PureComponent {
     super(props);
 
     this.state = {
-      refreshing: false,
-      setRefreshing: false,
-      HeadTable: ['Company Name'],
-      company: [],
-      isListEnd: false,
-      fetching_from_server: false,
-      searchText: '',
-      demoArray: [1, 2, 3, 4],
+      show: false,
+      date: new Date(),
+      mode: 'date',
+      selectedDate: new Date().toLocaleDateString('en-GB', {
+        day: 'numeric', month: 'short', year: 'numeric'
+      }).replace(/ /g, '-'),
+      totalHour: 2
     };
   }
 
@@ -43,6 +43,47 @@ class BookingScreen extends React.PureComponent {
     //this.getDatarows();
     //console.log(AsyncStorage.getItem("token"));
     //this.loadMoreData();
+  }
+
+  showMode = currentMode => {
+    this.setState({
+      show: true,
+      mode: currentMode
+    })
+  };
+
+  showDatepicker = () => {
+    this.showMode('date');
+  };
+
+  onChange = (event, selectedDate) => {
+    if (selectedDate === undefined) { 
+      this.setState({
+        show: false
+      })
+    }else{
+      let currentDate = selectedDate.toLocaleDateString('en-GB', {
+        day: 'numeric', month: 'short', year: 'numeric'
+      }).replace(/ /g, '-');
+      this.setState({
+        show: false,
+        selectedDate: currentDate
+      })
+    }
+  };
+
+  setHour = (type) => {
+    if(type == 'plus'){
+      this.setState({
+        totalHour: this.state.totalHour + 1
+      })
+    }else{
+      if(this.state.totalHour > 2){
+        this.setState({
+          totalHour: this.state.totalHour - 1
+        })
+      }
+    }
   }
 
   render() {
@@ -77,10 +118,22 @@ class BookingScreen extends React.PureComponent {
                     styles.px_10,
                   ]}>
                   <View style={[styles.verticalItem, styles.mb_5]}>
-                    <Text style={styles.bookBold}>Today</Text>
+                    <Text style={styles.bookBold}>{this.state.selectedDate}</Text>
                     <View style={[styles.mlAuto, styles.verticalItem]}>
-                      <Icon name="calendar" />
-                      <Text style={styles.ml_10}>Pick Date</Text>
+                      <Icon name="calendar" onPress={this.showDatepicker} />
+                      <Text style={styles.ml_10} onPress={this.showDatepicker}>Pick Date</Text>
+                      {this.state.show && (
+                        <DateTimePicker
+                          testID="datetimePicker"
+                          dateFormat={"year day month"} 
+                          timeZoneOffsetInMinutes={0}
+                          value={this.state.date}
+                          mode={this.state.mode}
+                          is24Hour={true}
+                          display="default"
+                          onChange={this.onChange}
+                        />
+                      )}
                     </View>
                   </View>
                   <View style={[styles.verticalItem, styles.mb_5]}>
@@ -94,13 +147,14 @@ class BookingScreen extends React.PureComponent {
                     <Text style={styles.bookTextLight}>How many hours</Text>
                   </View>
                   <View style={[styles.verticalItem, styles.mb_5]}>
-                    <Text style={styles.bookBold}>2 hrs</Text>
+                    <Text style={styles.bookBold}>{this.state.totalHour} hrs</Text>
                     <View style={[styles.mlAuto, styles.verticalItem]}>
                       <TouchableOpacity>
                         <Icon
                           size={20}
                           style={styles.bookRoundIcon}
                           name="plus"
+                          onPress={() => this.setHour('plus')}
                         />
                       </TouchableOpacity>
                       <TouchableOpacity>
@@ -108,6 +162,7 @@ class BookingScreen extends React.PureComponent {
                           size={20}
                           style={[styles.bookRoundIcon, styles.ml_20]}
                           name="minus"
+                          onPress={() => this.setHour('minus')}
                         />
                       </TouchableOpacity>
                     </View>
