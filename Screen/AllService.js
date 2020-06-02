@@ -454,7 +454,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = state => ({
-  services: state.service.service
+  services: state.service.services
 });
 const mapDispatchToProps = {
   getServices

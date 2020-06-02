@@ -1,4 +1,4 @@
-import { SERVICES, PROVIDERS } from '../constants';
+import { SERVICES, PROVIDERS, SERVICE, USER } from '../constants';
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from 'axios';
 let token = "";
@@ -39,3 +39,36 @@ export const getProviders = (serviceId) => dispatch => {
     payload: provider.data.data
   }));
 }
+
+export const getService = (serviceId) => dispatch => {
+  const headers = {  
+    "authorization":  token
+  }
+  axios.get('https://carekro.com/helptu/index.php/serviceApi/getService/'+serviceId, {
+    headers: headers
+  })
+  // .then(company => {
+  //   console.log(company  );
+  // })
+  .then(service => dispatch({
+    type: SERVICE,
+    payload: service.data.data
+  }));
+}
+
+export const getUser = (userId) => dispatch => {
+  const headers = {  
+    "authorization":  token
+  }
+  axios.get('https://carekro.com/helptu/index.php/serviceApi/getUser/'+userId, {
+    headers: headers
+  })
+  // .then(company => {
+  //   console.log(company  );
+  // })
+  .then(user => dispatch({
+    type: USER,
+    payload: user.data.data
+  }));
+}
+

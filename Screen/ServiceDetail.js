@@ -11,6 +11,8 @@ import {
   ScrollView,
   ImageBackground,
 } from 'react-native';
+import { connect } from 'react-redux';
+import { getUser } from '../src/actions/service';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {ListItem, SearchBar} from 'react-native-elements';
 import {Input} from 'react-native-elements';
@@ -43,6 +45,7 @@ class ServiceDetail extends React.PureComponent {
     //this.getDatarows();
     //console.log(AsyncStorage.getItem("token"));
     //this.loadMoreData();
+    this.props.getUser();
   }
 
   renderHeader = () => {
@@ -76,7 +79,7 @@ class ServiceDetail extends React.PureComponent {
             <ScrollView>
               <View style={styles.flexWrapper}>
                 <View style={styles.item}>
-                  <Text style={styles.userName}>Mike West</Text>
+                  <Text style={styles.userName}>{user.name}</Text>
                   <Text style={styles.decrip}>
                     Excepteur sint occaecat cupidatat
                   </Text>
@@ -99,7 +102,7 @@ class ServiceDetail extends React.PureComponent {
                   <TouchableOpacity
                     style={styles.bookBtn}
                     onPress={() =>
-                      this.props.navigation.navigate('BookingScreen')
+                      this.props.navigation.navigate('BookingScreen', {service_id: this.props.route.params.service_id, user_id: this.props.route.params.user_id})
                     }>
                     <Text style={styles.loginText}>Book Now</Text>
                   </TouchableOpacity>
@@ -281,4 +284,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ServiceDetail;
+const mapStateToProps = state => ({
+  user: state.service.user
+});
+const mapDispatchToProps = {
+  getUser
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ServiceDetail);

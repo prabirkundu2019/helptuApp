@@ -118,7 +118,7 @@ class ServiceProvider extends React.PureComponent {
                     marginLeft: 20,
                   }}
                   onPress={() =>
-                    this.props.navigation.navigate('ServiceDetail')
+                    this.props.navigation.navigate('ServiceDetail', {service_id: this.props.route.params.service_id, user_id: provider.user_id})
                   }>
                   <Icon
                     size={20}
@@ -464,7 +464,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => ({
   providers: state.service.providers,
-  service: state.service.serviceData,
+  service: state.service.service,
   totalProvider: state.service.totalProvider
 });
 const mapDispatchToProps = {

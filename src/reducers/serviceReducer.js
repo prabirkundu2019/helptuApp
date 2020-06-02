@@ -1,9 +1,10 @@
-import { SERVICES, PROVIDERS } from '../constants';
+import { SERVICES, PROVIDERS, SERVICE, USER } from '../constants';
 
 const initialState = {
-    service: [],
+    services: [],
     providers: [],
-    serviceData: {},
+    service: {},
+    user: {},
     totalProvider: 0
 };
 
@@ -13,15 +14,24 @@ const serviceReducer = (state = initialState, action) => {
         case SERVICES: 
             return {
                 ...state,
-                service: action.payload
+                services: action.payload
             };
         case PROVIDERS: 
-            console.log(action.payload);
             return {
                 ...state,
                 providers: action.payload.providers,
                 serviceData: action.payload.service,
                 totalProvider: action.payload.total_provider
+            };
+        case SERVICE: 
+            return {
+                ...state,
+                service: action.payload
+            };
+        case USER: 
+            return {
+                ...state,
+                user: action.payload
             };
         default:
             return state;
