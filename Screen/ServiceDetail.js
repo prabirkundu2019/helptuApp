@@ -42,10 +42,11 @@ class ServiceDetail extends React.PureComponent {
   }
 
   componentDidMount() {
+    //alert(this.props.route.params.user_id);
     //this.getDatarows();
     //console.log(AsyncStorage.getItem("token"));
     //this.loadMoreData();
-    this.props.getUser();
+    this.props.getUser(this.props.route.params.user_id);
   }
 
   renderHeader = () => {
@@ -62,6 +63,7 @@ class ServiceDetail extends React.PureComponent {
   };
 
   render() {
+    //console.log(this.props.user.name);
     return (
       <View style={styles.container}>
         <ImageBackground
@@ -79,7 +81,7 @@ class ServiceDetail extends React.PureComponent {
             <ScrollView>
               <View style={styles.flexWrapper}>
                 <View style={styles.item}>
-                  <Text style={styles.userName}>{user.name}</Text>
+                  <Text style={styles.userName}>{this.props.user.name}</Text>
                   <Text style={styles.decrip}>
                     Excepteur sint occaecat cupidatat
                   </Text>
