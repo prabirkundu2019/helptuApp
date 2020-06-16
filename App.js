@@ -12,11 +12,15 @@ import Spinner from 'react-native-loading-spinner-overlay';
 
 import LoginScreen from './Screen/LoginScreen';
 import RegistrationScreen from './Screen/RegistrationScreen';
+
 import HomeScreen from './Screen/HomeScreen';
 import AllService from './Screen/AllService';
 import ServiceProvider from './Screen/ServiceProvider';
 import ServiceDetail from './Screen/ServiceDetail';
 import BookingScreen from './Screen/BookingScreen';
+
+import MyBooking from './Screen/MyBooking';
+import Profile from './Screen/Profile';
 
 import axios from 'axios';
 
@@ -31,6 +35,7 @@ const AuthStackScreen = () => (
 
 const Tabs = createBottomTabNavigator();
 const HomeStack = createStackNavigator();
+const BookingStack = createStackNavigator();
 
 const HomeStackScreen = () => (
   <HomeStack.Navigator>
@@ -40,6 +45,13 @@ const HomeStackScreen = () => (
     <HomeStack.Screen name="ServiceDetail" component={ServiceDetail}   options={{headerShown: true}} />
     <HomeStack.Screen name="BookingScreen" component={BookingScreen}   options={{headerShown: false}} />
   </HomeStack.Navigator>
+);
+
+const BookingStackScreen = () => (
+  <BookingStack.Navigator>
+    <BookingStack.Screen name="MyBooking" component={MyBooking}   options={{headerShown: false}} />
+    <BookingStack.Screen name="Profile" component={Profile}   options={{headerShown: false}} />
+  </BookingStack.Navigator>
 );
 
 const TabsScreen = () => (
@@ -60,7 +72,7 @@ const TabsScreen = () => (
     />
     <Tabs.Screen 
       name="My Booking" 
-      component={HomeStackScreen}
+      component={BookingStackScreen}
       options={{
         tabBarLabel: 'My Booking',
         tabBarIcon: ({ color }) => (
@@ -80,7 +92,7 @@ const TabsScreen = () => (
     />
     <Tabs.Screen 
       name="Profile" 
-      component={HomeStackScreen} 
+      component={Profile} 
       options={{
         tabBarLabel: 'Profile',
         tabBarIcon: ({ color }) => (

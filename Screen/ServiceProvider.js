@@ -23,6 +23,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 //import { openDatabase } from 'react-native-sqlite-storage';
 import {AuthContext} from '../App';
 //var SQLite = require('react-native-sqlite-storage');
+import MapView from 'react-native-maps';
 
 //let db = openDatabase({ name: 'MetricsDatabase.db', location: 'Library', createFromLocation: '~MetricsDatabase.db'  });
 class ServiceProvider extends React.PureComponent {
