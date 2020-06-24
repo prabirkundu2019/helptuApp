@@ -9,15 +9,19 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { DrawerActions } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Spinner from 'react-native-loading-spinner-overlay';
+import { DrawerContent } from './Screen/DrawerContent';
 
 import LoginScreen from './Screen/LoginScreen';
 import RegistrationScreen from './Screen/RegistrationScreen';
 
 import HomeScreen from './Screen/HomeScreen';
+import SearchService from './Screen/SearchService';
 import AllService from './Screen/AllService';
 import ServiceProvider from './Screen/ServiceProvider';
 import ServiceDetail from './Screen/ServiceDetail';
 import BookingScreen from './Screen/BookingScreen';
+
+import BecomeService from './Screen/BecomeService';
 
 import MyBooking from './Screen/MyBooking';
 import Profile from './Screen/Profile';
@@ -40,6 +44,7 @@ const BookingStack = createStackNavigator();
 const HomeStackScreen = () => (
   <HomeStack.Navigator>
     <HomeStack.Screen name="Home" component={HomeScreen}   options={{headerShown: false}} />
+    <HomeStack.Screen name="Search" component={SearchService} />
     <HomeStack.Screen name="Service" component={AllService}   options={{headerShown: false}} />
     <HomeStack.Screen name="ServiceProvider" component={ServiceProvider}   options={{headerShown: false}} />
     <HomeStack.Screen name="ServiceDetail" component={ServiceDetail}   options={{headerShown: true}} />
@@ -50,7 +55,7 @@ const HomeStackScreen = () => (
 const BookingStackScreen = () => (
   <BookingStack.Navigator>
     <BookingStack.Screen name="MyBooking" component={MyBooking}   options={{headerShown: false}} />
-    <BookingStack.Screen name="Profile" component={Profile}   options={{headerShown: false}} />
+    <BookingStack.Screen name="BecomeService" component={BecomeService}   options={{headerShown: false}} />
   </BookingStack.Navigator>
 );
 
@@ -92,7 +97,7 @@ const TabsScreen = () => (
     />
     <Tabs.Screen 
       name="Profile" 
-      component={Profile} 
+      component={BecomeService} 
       options={{
         tabBarLabel: 'Profile',
         tabBarIcon: ({ color }) => (
@@ -105,7 +110,7 @@ const TabsScreen = () => (
 
 const Drawer = createDrawerNavigator();
 const DrawerScreen = () => (
-  <Drawer.Navigator initialRouteName="Home">
+  <Drawer.Navigator initialRouteName="Home" drawerContent={props => <DrawerContent {...props} />}>
     <Drawer.Screen name="Home" component={HomeStackScreen} />
   </Drawer.Navigator>
 );
@@ -198,6 +203,7 @@ export default function App({ navigation }) {
           {
             setUserToken(res.data.token);
             AsyncStorage.setItem('token', res.data.token);
+            AsyncStorage.setItem('name', res.data.name);
             dispatch({ type: 'SIGN_IN', token: res.data.token });
           }else{
             alert(res.data.msg);
