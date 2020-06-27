@@ -215,8 +215,8 @@ class ServiceProvider extends React.PureComponent {
                     <Text style={styles.titleMain}>{this.props.service.service_name}</Text>
                     <Text>{this.props.totalProvider} beautician are available near you</Text>
                   </View>
-                  <TouchableOpacity style={styles.mlAuto}>
-                    <Text style={{marginTop: 'auto', color: '#da3015',}}>View</Text>
+                  <TouchableOpacity style={styles.mlAuto} onPress={() => this.props.navigation.navigate('MapServiceProvider')}>
+                    <Text style={{marginTop: 'auto', color: '#da3015',}}>Map View</Text>
                   </TouchableOpacity>
                 </View>
                 {providers}

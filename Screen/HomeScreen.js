@@ -15,12 +15,20 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { connect } from 'react-redux';
 import { getServices } from '../src/actions/service';
 import AsyncStorage from '@react-native-community/async-storage';
+import Geocoder from 'react-native-geocoding';
+import Geolocation from 'react-native-geolocation-service';
+
+Geocoder.init("AIzaSyAgF8lXgbYkmkibiW_lzpb5hTH0AeItYDo");
 
 class HomeScreen extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      "userName": ""
+      "userName": "",
+      latitude: 0,
+      longitude: 0,
+      error: null,
+      Address: null
     }
   }
 
@@ -33,10 +41,43 @@ class HomeScreen extends React.PureComponent {
     //console.log(AsyncStorage.getItem("token"));
     //this.loadMoreData();
     this.props.getServices();
+    Geolocation.getCurrentPosition(
+      (position) => {
+          //console.log(position);
+          this.setState({
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+          });
+          Geocoder.from(position.coords.latitude, position.coords.longitude)
+          .then(json => {
+            //console.log(json);
+            var addressComponent = json.results[0].formatted_address;
+            this.setState({
+                Address: addressComponent
+            })
+            console.log(addressComponent);
+
+          })
+          .catch(error => console.warn(error));
+      },
+
+      (error) => {
+          // See error code charts below.
+          this.setState({
+              error: error.message
+          }),
+          console.log(error.code, error.message);
+      },
+      {
+          enableHighAccuracy: false,
+          timeout: 10000,
+          maximumAge: 100000
+      }
+    );
   }
 
   render(){
-    console.log(this.props.services);
+    //console.log(this.props.services);
     let service = this.props.services.map((category, index) => {
       return(
         <View style={styles.SingleService}>
@@ -74,6 +115,11 @@ class HomeScreen extends React.PureComponent {
               </View>
   
               <View style={styles.searchBox}>
+                <View>
+                  <TextInput
+                    value={this.state.Address}
+                    placeholder="Please enter your text" />
+                </View>
                 <View style={styles.searchBoxInner}>
                   <Icon name='map-marker' size={20} color="#da3015" style={styles.marker} />
                   <TextInput

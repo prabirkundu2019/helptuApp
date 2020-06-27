@@ -18,6 +18,7 @@ import HomeScreen from './Screen/HomeScreen';
 import SearchService from './Screen/SearchService';
 import AllService from './Screen/AllService';
 import ServiceProvider from './Screen/ServiceProvider';
+import MapServiceProvider from './Screen/MapServiceProvider';
 import ServiceDetail from './Screen/ServiceDetail';
 import BookingScreen from './Screen/BookingScreen';
 
@@ -43,10 +44,11 @@ const BookingStack = createStackNavigator();
 
 const HomeStackScreen = () => (
   <HomeStack.Navigator>
-    <HomeStack.Screen name="Home" component={HomeScreen}   options={{headerShown: false}} />
+    <HomeStack.Screen name="Home" component={HomeScreen} options={{headerShown: false}}  />
     <HomeStack.Screen name="Search" component={SearchService} />
     <HomeStack.Screen name="Service" component={AllService}   options={{headerShown: false}} />
     <HomeStack.Screen name="ServiceProvider" component={ServiceProvider}   options={{headerShown: false}} />
+    <HomeStack.Screen name="MapServiceProvider" component={MapServiceProvider} />
     <HomeStack.Screen name="ServiceDetail" component={ServiceDetail}   options={{headerShown: true}} />
     <HomeStack.Screen name="BookingScreen" component={BookingScreen}   options={{headerShown: false}} />
   </HomeStack.Navigator>
@@ -111,7 +113,7 @@ const TabsScreen = () => (
 const Drawer = createDrawerNavigator();
 const DrawerScreen = () => (
   <Drawer.Navigator initialRouteName="Home" drawerContent={props => <DrawerContent {...props} />}>
-    <Drawer.Screen name="Home" component={HomeStackScreen} />
+    <Drawer.Screen name="Home" component={TabsScreen} />
   </Drawer.Navigator>
 );
 
@@ -121,7 +123,7 @@ const RootStackScreen = ({ userToken }) => (
     {userToken ? (
       <RootStack.Screen
         name="App"
-        component={TabsScreen}
+        component={DrawerScreen}
         options={{
           animationEnabled: false
         }}

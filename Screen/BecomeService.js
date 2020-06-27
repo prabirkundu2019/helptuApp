@@ -12,11 +12,16 @@ import {
 import { Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const BecomeServiceProvider = () => {
+const BecomeService = () => {
 
   return(    
     <View style={styles.mainWrapper}>
+      <View style={styles.upperTextSec}>
+        <Text style={styles.heading}>Become a Service Provider</Text>
+        <Text style={styles.subHeading}>Please enter your personal details</Text>
+      </View>
       <View style={styles.curveArea}>
+          <ScrollView>
           <View style={styles.inputWrapper}>
             <TextInput placeholder="Your Name *" style={styles.inputField} />
           </View>
@@ -35,18 +40,33 @@ const BecomeServiceProvider = () => {
             <TextInput placeholder="Is there any more informations you'd like to ad about the restaurant? Mention it here......." multiline={true} scrollEnabled style={styles.inputField}/>
           </View>
           <TouchableOpacity style={styles.btnSubmit}><Text style={styles.btnLabel}>Submit</Text></TouchableOpacity>
+          </ScrollView>
       </View>
     </View>
   )
 }
 
-export default BecomeServiceProvider;
+export default BecomeService;
 
 const styles = StyleSheet.create({
   mainWrapper:{
     flex:1,
-    alignItems:'center',
     backgroundColor:'#da3015'
+  },
+  upperTextSec:{
+    justifyContent:'center',
+    height:160,
+    paddingHorizontal:22
+  },
+  heading:{
+    color:"#FFF",
+    fontSize:24,
+    fontWeight:'700',
+    marginBottom:5
+  },
+  subHeading:{
+    color:"#FFF",
+    fontSize:14
   },
   curveArea:{
     width:'100%',

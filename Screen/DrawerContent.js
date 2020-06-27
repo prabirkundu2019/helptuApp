@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Dimensions, ImageBackground, Image } from 'react-native';
+import { View, StyleSheet, Dimensions, ImageBackground,TouchableOpacity, Image } from 'react-native';
 import {
     useTheme,
     Avatar,
@@ -8,7 +8,6 @@ import {
     Paragraph,
     Drawer,
     Text,
-    TouchableRipple,
     Switch
 } from 'react-native-paper';
 import {
@@ -18,6 +17,7 @@ import {
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontIcon from 'react-native-vector-icons/FontAwesome';
+import FontIcon5 from 'react-native-vector-icons/FontAwesome5'
 
 //import{ AuthContext } from '../components/context';
 
@@ -29,97 +29,163 @@ export function DrawerContent(props) {
     //const { signOut, toggleTheme } = React.useContext(AuthContext);
 
     return(     
-        <View style={{flex:1}}>  
-            <ImageBackground style={styles.image}>          
+        <View style={{flex:1, backgroundColor:"#da3015"}}>            
             <DrawerContentScrollView {...props}>               
                 <View style={styles.drawerContent}>                
                     <View style={styles.userInfoSection}>
-                        <View style={{alignItems:"center"}}>
                             <Avatar.Image 
-                                
-                                size={70}
+                                source={require('./images/bell.png')}
+                                size={62}
                             />
-                            <View style={{alignItems:"center"}}>
-                                <Title style={styles.title}>Guest User</Title>
-                                <Caption style={styles.caption}>+91 9723456789</Caption>
+                            <View>
+                                <Title style={styles.title}>Kate Wilson</Title>
                             </View>
-                        </View>
                     </View>
-
-                    <Drawer.Section style={styles.drawerSection}>                    
+                    <View style={{paddingHorizontal:20}}>
+                        <TouchableOpacity style={styles.btn}>
+                            <Text style={styles.btnText}>Become a service</Text>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.drawerSection}>                    
                         <DrawerItem 
-                            label="MENU DISC"
+                            icon={({color, size}) => (
+                                <Icon name="home" color="#FFF" size={20} style={styles.MenuIcon} />
+                            )}
+                            label="Home"
                             labelStyle={{color:'#FFF'}}
                             onPress={() => {props.navigation.navigate('Home')}}
-                        />
-                        <DrawerItem 
-                            // icon={({color, size}) => (
-                            //     <Image source={require('./images/order-icon.png')} style={styles.MenuIcon} />
-                            // )}
-                            labelStyle={{color:'#FFF'}}
-                            label="MY ORDERS"
-                            onPress={() => {props.navigation.navigate('Profile')}}
+                            style={{height:30}}
                         />
                         <DrawerItem 
                             icon={({color, size}) => (
-                                <FontIcon 
-                                name="share" 
-                                color="#FFF"
-                                size={20}
-                                />
+                                <FontIcon name="user" color="#FFF" size={20} style={styles.MenuIcon} />
                             )}
+                            label="Profile"
                             labelStyle={{color:'#FFF'}}
-                            label="SHARE"
-                            onPress={() => {props.navigation.navigate('BookmarkScreen')}}
+                            onPress={() => {props.navigation.navigate('Home')}}
+                            style={{height:30}}
                         />
                         <DrawerItem 
                             icon={({color, size}) => (
-                                <FontIcon 
-                                name="user-o" 
-                                color='#FFF'
-                                size={20}
-                                />
+                                <FontIcon name="map-marker" color="#FFF" size={20} style={styles.MenuIcon} />
                             )}
+                            label="Nearby Me"
                             labelStyle={{color:'#FFF'}}
-                            label="ABOUT US"
-                            onPress={() => {props.navigation.navigate('SettingScreen')}}
+                            onPress={() => {props.navigation.navigate('Home')}}
+                            style={{height:32}}
                         />
                         <DrawerItem 
                             icon={({color, size}) => (
-                                <FontIcon 
-                                name="envelope-o" 
-                                color='#FFF'
-                                size={20}
-                                />
+                                <FontIcon name="heart" color="#FFF" size={20} style={styles.MenuIcon} />
                             )}
+                            label="Favorites"
                             labelStyle={{color:'#FFF'}}
-                            label="EMAIL US"
-                            onPress={() => {props.navigation.navigate('SupportScreen')}}
+                            onPress={() => {props.navigation.navigate('Home')}}
+                            style={{height:32}}
                         />
-                    </Drawer.Section>                    
+                        <DrawerItem 
+                            icon={({color, size}) => (
+                                <Image source={require('./images/bell.png')} style={styles.MenuIconImage} />
+                            )}
+                            label="Notification"
+                            labelStyle={{color:'#FFF'}}
+                            onPress={() => {props.navigation.navigate('Home')}}
+                            style={{height:33}}
+                        />
+                        <DrawerItem 
+                            icon={({color, size}) => (
+                                <Image source={require('./images/bookmark-icon.png')} style={styles.MenuIconImage} />
+                            )}
+                            label="Address Book"
+                            labelStyle={{color:'#FFF'}}
+                            onPress={() => {props.navigation.navigate('Home')}}
+                            style={{height:32}}
+                        />
+                        <DrawerItem 
+                            icon={({color, size}) => (
+                                <Image source={require('./images/scooter-icon.png')} style={styles.MenuIconImage} />
+                            )}
+                            label="Your Orders"
+                            labelStyle={{color:'#FFF'}}
+                            onPress={() => {props.navigation.navigate('Home')}}
+                            style={{height:35}}
+                        />                    
+                    </View>
+
+                    <View style={styles.drawerSection}>                    
+                        <DrawerItem 
+                            icon={({color, size}) => (
+                                <Image source={require('./images/tag.png')} style={styles.MenuIconImage} />
+                            )}
+                            label="Promotions"
+                            labelStyle={{color:'#FFF'}}
+                            onPress={() => {props.navigation.navigate('Home')}}
+                            style={{height:34}}
+                        />
+                        <DrawerItem 
+                            icon={({color, size}) => (
+                                <Icon name="settings" color="#FFF" size={20} style={styles.MenuIcon} />
+                            )}
+                            label="Settings"
+                            labelStyle={{color:'#FFF'}}
+                            onPress={() => {props.navigation.navigate('Home')}}
+                            style={{height:33}}
+                        />
+                        <DrawerItem 
+                            icon={({color, size}) => (
+                                <FontIcon5 name="headset" color="#FFF" size={20} style={styles.MenuIcon} />
+                            )}
+                            label="Help"
+                            labelStyle={{color:'#FFF'}}
+                            onPress={() => {props.navigation.navigate('Home')}}
+                            style={{height:32}}
+                        />
+                        <DrawerItem 
+                            icon={({color, size}) => (
+                                <Icon name="thumbs-up-down" color="#FFF" size={20} style={styles.MenuIcon} />
+                            )}
+                            label="Send Feedback"
+                            labelStyle={{color:'#FFF'}}
+                            onPress={() => {props.navigation.navigate('Home')}}
+                            style={{height:32}}
+                        />
+                        <DrawerItem 
+                            icon={({color, size}) => (
+                                <FontIcon name="star" color="#FFF" size={20} style={styles.MenuIcon} />
+                            )}
+                            label="Rate us on the Play Store"
+                            labelStyle={{color:'#FFF'}}
+                            onPress={() => {props.navigation.navigate('Home')}}
+                            style={{height:33}}
+                        />                   
+                    </View>
                 </View>
             </DrawerContentScrollView>
-            {/* <Drawer.Section style={styles.bottomDrawerSection}>
+            <Drawer.Section style={styles.bottomDrawerSection}>
                 <DrawerItem 
                     icon={({color, size}) => (
                         <Icon 
                         name="exit-to-app" 
-                        color={color}
-                        size={size}
+                        color="#FFF"
+                        size={20}
+                        style={styles.MenuIcon}
                         />
                     )}
-                    label="Sign Out"
+                    labelStyle={{color:'#FFF'}}
+                    label="Logout"
                     onPress={() => {signOut()}}
                 />
-            </Drawer.Section> */}
-            </ImageBackground>
+            </Drawer.Section>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    drawerContent: {
-      flex: 1,
+    drawerContent:{
+        paddingHorizontal:15
+    },
+    bottomDrawerSection:{
+        paddingHorizontal:15
     },
     image: {
         flex: 1,
@@ -127,26 +193,42 @@ const styles = StyleSheet.create({
         justifyContent: "center"
       },
     userInfoSection: {
-        flex:1,
-        height:170,
-        justifyContent:'center',
-        alignItems:"center",
-        backgroundColor:'#827e09',
-        marginTop:-5
+        flexDirection:'row',
+        alignItems:'center',
+        paddingHorizontal:20,
+        paddingVertical:20        
     },
     title: {
-      fontSize: 16,
+      fontSize: 18,
       marginTop: 3,
       fontWeight: '400',
-      color:'#FFF'
+      color:'#FFF',
+      marginLeft:15
     },
-    caption: {
-      fontSize: 14,
-      lineHeight: 14,
-      color:'#FFF'
+    btn:{
+        width:180,
+        paddingHorizontal:20,
+        paddingVertical:7,
+        alignItems:'center',
+        backgroundColor:'#eb3d21',
+        shadowColor: "#000",
+        shadowOffset: {
+        width: 0,
+        height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
+    },
+    btnText:{
+        color:"#FFF",
+        fontSize:15,
+        fontWeight:'700'
     },
     drawerSection:{
-        paddingTop:20
+        paddingBottom:10,
+        borderBottomColor:'#ee9e92',
+        borderBottomWidth:2
     },
     row: {
       marginTop: 20,
@@ -154,8 +236,12 @@ const styles = StyleSheet.create({
       alignItems: 'center',
     },
     MenuIcon:{
-        width:22,
-        height:22,
-        resizeMode:'stretch'
+        width:23,
+        height:20,
+        alignItems:'center'
+    },
+    MenuIconImage:{
+        width:23,
+        resizeMode:'contain'
     }
   });
