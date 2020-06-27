@@ -9,6 +9,7 @@ import {
   View,
   FlatList,
   ScrollView,
+  Picker,
   ImageBackground,
 } from 'react-native';
 import { connect } from 'react-redux';
@@ -98,7 +99,7 @@ class ServiceDetail extends React.PureComponent {
                     <Text style={styles.textAcitve}>Open Now</Text>
                     <Text style={styles.textMute}> : 10am to 5pm </Text>
                   </View>
-                </View>
+                </View>               
 
                 <View style={styles.bottomView}>
                   <TouchableOpacity
@@ -110,6 +111,32 @@ class ServiceDetail extends React.PureComponent {
                   </TouchableOpacity>
                 </View>
               </View>
+
+              <View style={{marginTop:20}}>
+                <View style={{flexDirection:'row', alignItems:"center", justifyContent:'space-between', borderBottomColor:'#707070', borderBottomWidth:1}}>
+                  <View style={{flexDirection:'row', alignItems:"center"}}>
+                    <Text style={styles.reviewTitle}>All Reviews</Text>
+                    <Text style={styles.reviewCount}>28</Text>
+                  </View>
+                  <View style={{flexDirection:'row', alignItems:"center", borderBottomWidth:2, borderBottomColor:"#da3015"}}>
+                    <Picker style={{ height:30, width: 130 }}>
+                      <Picker.Item label="Newest" value="Newest" />
+                    </Picker>
+                    <Icon name="bell" color="#737272" size={16}/>
+                  </View>
+                </View>
+                <View style={styles.singleReview}>
+                  <Image source={require('./images/review-user.png')} />
+                  <View style={{width:'80%', paddingLeft:10}}>
+                    <View style={{flexDirection:'row', alignItems:"flex-end", marginBottom:8}}>
+                      <Text style={styles.reviewerName}>Jean Dolly</Text>
+                      <Text style={styles.ratings}><Icon name="star" color="#4c7cff"/> . 2 DAYS AGO</Text>
+                    </View>
+                    <Text style={styles.reviewText}>Too much professional.I just loved the hair spa & I'll highly recommend her. She is awesome at her work.</Text>
+                  </View>
+                </View>
+              </View>
+
             </ScrollView>
           </View>
         </ImageBackground>
@@ -284,6 +311,43 @@ const styles = StyleSheet.create({
     fontSize: 15,
     paddingLeft: 5,
   },
+
+  // sonai style
+  reviewTitle:{
+    color:"#000000",
+    fontSize:14
+  },
+  reviewCount:{
+    color:"#000000",
+    fontSize:12,
+    marginLeft:5,
+    backgroundColor:'#e5e2e2',
+    paddingHorizontal:3,
+    paddingVertical:3
+  },
+  singleReview:{
+    flexDirection:'row',
+    alignItems:'flex-start',
+    borderBottomColor:'#dbdbdb',
+    borderBottomWidth:1,
+    paddingVertical:14
+  },
+  reviewerName:{
+    fontSize:14,
+    color:"#da3015",
+    fontWeight:'500',
+    marginRight:8
+  },
+  ratings:{
+    color:"#da3015",
+    fontSize:10
+  },
+  reviewText:{
+    color:"#6d6d6d",
+    fontSize:12,
+    fontWeight:"500",
+    lineHeight:14
+  }
 });
 
 const mapStateToProps = state => ({

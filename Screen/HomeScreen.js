@@ -160,7 +160,7 @@ const styles = StyleSheet.create({
   },
   padding:{
     paddingHorizontal:15,
-    paddingVertical:30
+    paddingVertical:0
   },
   profileInfo:{
     flexDirection:'row',
@@ -186,13 +186,13 @@ const styles = StyleSheet.create({
     marginBottom:30
   },
   SingleServiceBox:{
-    width:130,
+    width:110,
     padding:10,
     alignItems:'center',
   },
   imageArea:{
     width:'100%',
-    height:100,
+    height:80,
     alignItems:'center',
     justifyContent:'center',
     backgroundColor:'#FFF',

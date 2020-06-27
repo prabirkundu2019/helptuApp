@@ -8,6 +8,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { DrawerActions } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MatIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { DrawerContent } from './Screen/DrawerContent';
 
@@ -42,9 +43,19 @@ const Tabs = createBottomTabNavigator();
 const HomeStack = createStackNavigator();
 const BookingStack = createStackNavigator();
 
-const HomeStackScreen = () => (
+const HomeStackScreen = ({navigation}) => (
   <HomeStack.Navigator>
-    <HomeStack.Screen name="Home" component={HomeScreen} options={{headerShown: false}}  />
+    <HomeStack.Screen name="Home" component={HomeScreen} 
+    options={{
+      title: '',
+      headerStyle: {
+        backgroundColor: '#FFF',
+        elevation: 0
+      },
+      headerRight: () => (
+        <MatIcon onPress={() => navigation.toggleDrawer()} name="menu" color="#000" size={24} style={{marginRight:15}}/>
+      ),
+    }}/>
     <HomeStack.Screen name="Search" component={SearchService} />
     <HomeStack.Screen name="Service" component={AllService}   options={{headerShown: false}} />
     <HomeStack.Screen name="ServiceProvider" component={ServiceProvider}   options={{headerShown: false}} />
