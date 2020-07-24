@@ -8,6 +8,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { DrawerActions } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MatIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Spinner from 'react-native-loading-spinner-overlay';
 import { DrawerContent } from './Screen/DrawerContent';
 
@@ -23,6 +24,12 @@ import ServiceDetail from './Screen/ServiceDetail';
 import BookingScreen from './Screen/BookingScreen';
 
 import BecomeService from './Screen/BecomeService';
+import SettingScreen from './Screen/SettingScreen';
+import YourOrders from './Screen/YourOrders';
+import CustomerSupport from './Screen/CustomerSupport';
+import Feedback from './Screen/Feedback';
+import MyAddress from './Screen/MyAddress';
+import NotificationPreference from './Screen/NotificationPreference';
 
 import MyBooking from './Screen/MyBooking';
 import Profile from './Screen/Profile';
@@ -42,15 +49,31 @@ const Tabs = createBottomTabNavigator();
 const HomeStack = createStackNavigator();
 const BookingStack = createStackNavigator();
 
-const HomeStackScreen = () => (
+const HomeStackScreen = ({navigation}) => (
   <HomeStack.Navigator>
-    <HomeStack.Screen name="Home" component={HomeScreen} options={{headerShown: false}}  />
+    <HomeStack.Screen name="Home" component={HomeScreen} 
+    options={{
+      title: '',
+      headerStyle: {
+        backgroundColor: '#FFF',
+        elevation: 0
+      },
+      headerRight: () => (
+        <MatIcon onPress={() => navigation.toggleDrawer()} name="menu" color="#000" size={24} style={{marginRight:15}}/>
+      ),
+    }}/>
     <HomeStack.Screen name="Search" component={SearchService} />
     <HomeStack.Screen name="Service" component={AllService}   options={{headerShown: false}} />
     <HomeStack.Screen name="ServiceProvider" component={ServiceProvider}   options={{headerShown: false}} />
     <HomeStack.Screen name="MapServiceProvider" component={MapServiceProvider} />
     <HomeStack.Screen name="ServiceDetail" component={ServiceDetail}   options={{headerShown: true}} />
     <HomeStack.Screen name="BookingScreen" component={BookingScreen}   options={{headerShown: false}} />
+    <HomeStack.Screen name="Setting" component={SettingScreen} />
+    <HomeStack.Screen name="Order" component={YourOrders} />
+    <HomeStack.Screen name="CustomerSupport" component={CustomerSupport} options={{headerShown: false}} />
+    <HomeStack.Screen name="Feedback" component={Feedback} options={{headerShown: false}} />
+    <HomeStack.Screen name="MyAddress" component={MyAddress} options={{headerShown: false}} />
+    <HomeStack.Screen name="NotificationPreference" component={NotificationPreference} options={{headerShown: false}} />
   </HomeStack.Navigator>
 );
 
@@ -99,7 +122,7 @@ const TabsScreen = () => (
     />
     <Tabs.Screen 
       name="Profile" 
-      component={BecomeService} 
+      component={HomeStackScreen} 
       options={{
         tabBarLabel: 'Profile',
         tabBarIcon: ({ color }) => (

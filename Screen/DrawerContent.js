@@ -42,7 +42,7 @@ export function DrawerContent(props) {
                             </View>
                     </View>
                     <View style={{paddingHorizontal:20}}>
-                        <TouchableOpacity style={styles.btn}>
+                        <TouchableOpacity style={styles.btn} onPress={() => {props.navigation.navigate('BecomeService')}}>
                             <Text style={styles.btnText}>Become a service</Text>
                         </TouchableOpacity>
                     </View>
@@ -89,7 +89,7 @@ export function DrawerContent(props) {
                             )}
                             label="Notification"
                             labelStyle={{color:'#FFF'}}
-                            onPress={() => {props.navigation.navigate('Home')}}
+                            onPress={() => {props.navigation.navigate('NotificationPreference')}}
                             style={{height:33}}
                         />
                         <DrawerItem 
@@ -98,7 +98,7 @@ export function DrawerContent(props) {
                             )}
                             label="Address Book"
                             labelStyle={{color:'#FFF'}}
-                            onPress={() => {props.navigation.navigate('Home')}}
+                            onPress={() => {props.navigation.navigate('MyAddress')}}
                             style={{height:32}}
                         />
                         <DrawerItem 
@@ -107,7 +107,7 @@ export function DrawerContent(props) {
                             )}
                             label="Your Orders"
                             labelStyle={{color:'#FFF'}}
-                            onPress={() => {props.navigation.navigate('Home')}}
+                            onPress={() => {props.navigation.navigate('Order')}}
                             style={{height:35}}
                         />                    
                     </View>
@@ -128,7 +128,7 @@ export function DrawerContent(props) {
                             )}
                             label="Settings"
                             labelStyle={{color:'#FFF'}}
-                            onPress={() => {props.navigation.navigate('Home')}}
+                            onPress={() => {props.navigation.navigate('Setting')}}
                             style={{height:33}}
                         />
                         <DrawerItem 
@@ -137,7 +137,7 @@ export function DrawerContent(props) {
                             )}
                             label="Help"
                             labelStyle={{color:'#FFF'}}
-                            onPress={() => {props.navigation.navigate('Home')}}
+                            onPress={() => {props.navigation.navigate('CustomerSupport')}}
                             style={{height:32}}
                         />
                         <DrawerItem 
@@ -146,7 +146,7 @@ export function DrawerContent(props) {
                             )}
                             label="Send Feedback"
                             labelStyle={{color:'#FFF'}}
-                            onPress={() => {props.navigation.navigate('Home')}}
+                            onPress={() => {props.navigation.navigate('Feedback')}}
                             style={{height:32}}
                         />
                         <DrawerItem 

@@ -20,6 +20,7 @@ import MapView, {
 } from "react-native-maps";
 import Geolocation from '@react-native-community/geolocation';
 import { db } from '../config';
+import axios from 'axios';
 
 const LATITUDE_DELTA = 0.009;
 const LONGITUDE_DELTA = 0.009;
@@ -32,22 +33,52 @@ class MapServiceProvider extends React.Component {
     this.state = {
       coordinates: [],
       latitude: LATITUDE,
-      longitude: LONGITUDE
+      longitude: LONGITUDE,
+      markers: [{
+        title: 'hello',
+        coordinates: {
+          latitude: 22.489660,
+          longitude: 88.399420
+        },
+      },
+      {
+        title: 'hello',
+        coordinates: {
+          latitude: 22.485350,
+          longitude: 88.366020
+        },  
+      }]
     };
   }
 
   componentDidMount() {   
-    // let itemsRef = db.ref('/coordinates'); 
-    // itemsRef.on('value', snapshot => {
-    //     let data = snapshot.val();
-    //     let coordinates = Object.values(data);
-    //     let lastKey = coordinates.length - 1;
-    //     console.log(coordinates[lastKey].latitude);
-    //     this.setState({
-    //         latitude: coordinates[lastKey].latitude,
-    //         longitude: coordinates[lastKey].longitude
-    //     })
-    // });
+    Geolocation.getCurrentPosition(
+      (position) => {
+          //console.log(position);
+          this.setState({
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+          });
+          axios.get('https://carekro.com/helptu/index.php/api/getProviders?latitude='+this.state.latitude+'&longitude='+this.state.longitude)
+          .then(res=>{
+              console.log(res.data);
+              alert(res.data.message);
+              //this.props.navigation.navigate('Dashboard');
+          })
+      },
+      (error) => {
+          // See error code charts below.
+          this.setState({
+              error: error.message
+          }),
+          console.log(error.code, error.message);
+      },
+      {
+          enableHighAccuracy: false,
+          timeout: 10000,
+          maximumAge: 100000
+      }
+    );
   }
 
   getMapRegion = () => ({
@@ -62,6 +93,7 @@ class MapServiceProvider extends React.Component {
       <View style={styles.container}>
         <MapView
           style={styles.map}
+          maxZoomLevel={10}
           provider={PROVIDER_GOOGLE}
           showUserLocation
           followUserLocation
@@ -80,7 +112,13 @@ class MapServiceProvider extends React.Component {
               style={{ height: 35, width: 35 }}
             />
           </Marker.Animated> */}
-          <MapView.Marker
+          {this.state.markers.map(marker => (
+            <MapView.Marker 
+              coordinate={marker.coordinates}
+              title={marker.title}
+            />
+          ))}
+          {/* <MapView.Marker
             coordinate={{latitude: this.state.latitude,
             longitude: this.state.longitude}}
             title={"title"}
@@ -96,7 +134,7 @@ class MapServiceProvider extends React.Component {
                 </View>
               </Animated.View>
             
-          </MapView.Marker>
+          </MapView.Marker> */}
           
         </MapView>
       </View>

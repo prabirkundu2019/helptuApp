@@ -42,7 +42,11 @@ class ServiceProvider extends React.PureComponent {
     };
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    let address = await AsyncStorage.getItem('address');
+    this.setState({
+      "address":address
+    })
     //this.getDatarows();
     //console.log(AsyncStorage.getItem("token"));
     //this.loadMoreData();
@@ -73,56 +77,57 @@ class ServiceProvider extends React.PureComponent {
             styles.px_10,
             styles.mb_20,
           ]}>
-          <View style={styles.verticalItem}>
+          <View style={[styles.verticalItem, {alignItems:'center'}]}>
             <Image
               style={[styles.userCircleTop]}
               source={require('../assets/img/person-2.png')}
               //imageStyle={{borderRadius: 40}}
             />
 
-            <View style={{width: 150, marginLeft: 10}}>
-              <Text style={styles.servItemTitle}>{provider.name} </Text>
-              <Text style={{}}>Excepteur sint occaecat cupidatat </Text>
-              <View style={[styles.verticalItem, styles.rateHold]}>
-                <Image
-                  style={styles.rateImg}
-                  source={require('../assets/img/star-1.png')}
+            <View style={{width:'60%', marginLeft:5}}>
+              <Text style={styles.servItemTitle}>{provider.name}</Text>
+              <Text style={{fontSize:12, color:"#6d6d6d", marginBottom:5}}>Excepteur sint occaecat cupidatat </Text>
+              <View style={[styles.verticalItem, {alignItems:'center'}]}>
+                <Icon
+                  name="star"
+                  color="#ffc107"
+                  size={12}
                 />
                 <Text style={styles.rateText}>3.2</Text>
               </View>
             </View>
 
             <View style={[styles.mlAuto]}>
-              <View style={styles.ml_10}>
+              <View style={{alignItems:'center'}}>
                 {/* <Text style={styles.ml_10}>$40</Text> */}
                 <View
                   style={[
                     styles.verticalItem,
-                    styles.mb_20,
-                    styles.ml_20,
+                    {alignItems:'center', marginBottom:10}
                   ]}>
                   <Icon
-                    style={styles.mr_10}
-                    size={15}
+                    color="#6d6d6d"
+                    size={12}
                     name="map-marker"
+                    style={{marginRight:5}}
                   />
-                  <Text style={[styles.mr_10]}>1.2</Text>
+                  <Text style={{color:"#6d6d6d", fontSize:12}}>1.2</Text>
                 </View>
                 <TouchableOpacity
                   style={{
-                    height: 40,
-                    width: 40,
+                    height:35,
+                    width: 35,
                     justifyContent: 'center',
                     alignItems: 'center',
                     backgroundColor: '#da3015',
                     borderRadius: 50,
-                    marginLeft: 20,
+                    marginLeft:10,
                   }}
                   onPress={() =>
                     this.props.navigation.navigate('ServiceDetail', {service_id: this.props.route.params.service_id, user_id: provider.user_id})
                   }>
                   <Icon
-                    size={20}
+                    size={16}
                     //style={styles.ml_20}
                     name="long-arrow-right"
                     color="white"
@@ -196,7 +201,7 @@ class ServiceProvider extends React.PureComponent {
                     name="map-marker"
                   />
                   <Text style={[styles.userShortText, styles.mr_10]}>
-                    28, Dixon lane Kolkata
+                    {this.state.address}
                   </Text>
                   <Icon
                     style={[styles.textWhite, styles.mr_10]}
@@ -210,13 +215,17 @@ class ServiceProvider extends React.PureComponent {
           <View style={styles.formContainer}>
             <View style={styles.flexWrapper}>
               <View style={styles.bookingDetails}>
-                <View style={[styles.verticalItem, styles.mb_20]}>
+                <View style={styles.alignHeading}>
                   <View>
-                    <Text style={styles.titleMain}>{this.props.service.service_name}</Text>
-                    <Text>{this.props.totalProvider} beautician are available near you</Text>
+                    <View style={[styles.verticalItem, {alignItems:'center'}]}>
+                    <Text style={styles.serviceHeading}>Beauty Services</Text>
+                    {/* <Text style={styles.titleMain}>{this.props.service.service_name}</Text> */}
+                    <TouchableOpacity><Text style={{color:"#da3015", fontSize:11, marginLeft:6}}>View All</Text></TouchableOpacity>
+                    </View>
+                    <Text style={styles.serviceSubHeading}>{this.props.totalProvider} beautician are available near you</Text>
                   </View>
                   <TouchableOpacity style={styles.mlAuto} onPress={() => this.props.navigation.navigate('MapServiceProvider')}>
-                    <Text style={{marginTop: 'auto', color: '#da3015',}}>Map View</Text>
+                    <Text style={[styles.mapBtn, {marginTop: 'auto'}]}>Map View</Text>
                   </TouchableOpacity>
                 </View>
                 {providers}
@@ -238,7 +247,11 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginTop: 30,
   },
-
+  alignHeading:{
+    flexDirection:'row',
+    alignItems:'flex-start',
+    marginBottom:20
+  },
   item: {
     flex: 1,
     padding: 20,
@@ -266,11 +279,13 @@ const styles = StyleSheet.create({
     marginRight: 10,
   },
   servItemTitle: {
-    fontSize: 18,
+    fontSize: 17,
+    color:"#404040",
     fontWeight: 'bold',
   },
   bgLightGray: {
     backgroundColor: '#f4f4f4',
+    borderRadius:10
   },
   hr: {
     width: '90%',
@@ -344,12 +359,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     /* borderTopRightRadius: 20,
     borderTopLeftRadius: 20, */
-    paddingHorizontal: 5,
-    paddingVertical: 30,
+    paddingHorizontal:20,
+    paddingVertical:10,
     paddingBottom: 10,
   },
   flexWrapper: {
-    marginHorizontal: 30,
+    marginTop:20,
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -376,8 +391,9 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   rateText: {
-    marginLeft: 10,
-    fontSize: 17,
+    marginLeft:5,
+    fontSize: 12,
+    color:"#6d6d6d"
   },
   inputView: {
     width: '100%',
@@ -461,6 +477,26 @@ const styles = StyleSheet.create({
     fontSize: 15,
     paddingLeft: 5,
   },
+  serviceHeading:{
+    color:"#404040",
+    fontSize:20,
+    fontWeight: 'bold',
+    fontFamily: 'Circular Std Bold',
+  },
+  serviceSubHeading:{
+    fontSize:12,
+    color:"#6d6d6d",
+    fontFamily: 'Circular Std Bold'
+  },
+  mapBtn:{
+    width:80,
+    textAlign:'center',
+    color: '#FFF',
+    backgroundColor:"#da3015",
+    paddingVertical:4,
+    fontWeight: 'bold',
+    fontFamily: 'Circular Std Bold',
+  }
 });
 
 const mapStateToProps = state => ({
